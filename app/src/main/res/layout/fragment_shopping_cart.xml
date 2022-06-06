@@ -9,11 +9,71 @@
         android:layout_height="match_parent"
         tools:context=".presentation.Tabs.ShoppingCart">
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="ShoppingCart" />
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/clearCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin = "20dp"
+                android:background="@color/orange"
+                android:textColor="@color/black"
+                android:text="@string/clearCard"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/clearCard"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/headerTotalOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/listCard"
+                app:layout_constraintRight_toLeftOf="@id/totalOrder"
+                android:layout_margin="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/totalOrder"
+                android:textColor="@color/orange"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/totalOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/listCard"
+                app:layout_constraintRight_toLeftOf="@id/currTotalOrder"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/orange"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/currTotalOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/orange"
+                android:text="@string/ruble"
+                app:layout_constraintTop_toBottomOf="@id/listCard"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/checkoutCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="60dp"
+                android:background="@color/orange"
+                android:textColor="@color/black"
+                android:text="@string/checkout"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>
 </layout>

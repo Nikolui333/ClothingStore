@@ -8,7 +8,6 @@ import com.semenovnikolay.clothingstore.presentation.Tabs.AddClothes
 import com.semenovnikolay.clothingstore.presentation.Tabs.Favorite
 import com.semenovnikolay.clothingstore.presentation.Tabs.ShoppingCart
 
-
 class MainActivity : AppCompatActivity() {
 
     private var binding: ActivityMainBinding? = null

@@ -6,4 +6,10 @@
     <string name="shopping_cart">CARD</string>
     <string name="favorite">FAVORITE</string>
 
+    <string name="ruble">Р</string>
+    <string name="clearCard">CLEAR CARD</string>
+    <string name="clearOrders">CLEAR ORDERS</string>
+    <string name="checkout">CHECKOUT</string>
+    <string name="totalOrder">TOTAL:</string>
+
 </resources>

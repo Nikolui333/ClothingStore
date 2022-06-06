@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/User/KotlinAndroidCours/ClothingStore/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.186" />
+        <entry key="..\:/User/KotlinAndroidCours/ClothingStore/app/src/main/res/drawable/ic_baseline_delete_forever_24.xml" value="0.186" />
+        <entry key="..\:/User/KotlinAndroidCours/ClothingStore/app/src/main/res/drawable/ic_launcher_background.xml" value="0.186" />
+        <entry key="..\:/User/KotlinAndroidCours/ClothingStore/app/src/main/res/drawable/shopping_cart.xml" value="0.186" />
+        <entry key="..\:/User/KotlinAndroidCours/ClothingStore/app/src/main/res/layout/card_item.xml" value="0.11481481481481481" />
         <entry key="..\:/User/KotlinAndroidCours/ClothingStore/app/src/main/res/layout/fragment_add_clothes.xml" value="0.22826086956521738" />
         <entry key="..\:/User/KotlinAndroidCours/ClothingStore/app/src/main/res/layout/fragment_favorite.xml" value="0.22826086956521738" />
         <entry key="..\:/User/KotlinAndroidCours/ClothingStore/app/src/main/res/layout/fragment_shopping_cart.xml" value="0.11302083333333333" />
