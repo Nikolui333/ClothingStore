@@ -12,8 +12,8 @@ class AddClothesRepository(private val addClothesApiDataSource: AddClothesApiDat
 ) : AddClothesCall {
 
     // загрузка данных из локальной базы данных
-    override fun loadMedicines(): LiveData<List<AddLocalModel>> {
-        return addClothesDataSource.loadMedicines()    }
+    override fun loadAddClothes(): LiveData<List<AddLocalModel>> {
+        return addClothesDataSource.loadAddClothes()    }
 
     // метод меграций
     override suspend fun startMigration(context: Context) {

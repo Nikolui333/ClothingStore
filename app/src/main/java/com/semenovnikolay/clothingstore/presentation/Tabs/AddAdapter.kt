@@ -10,35 +10,43 @@ import com.semenovnikolay.clothingstore.data.models.AddLocalModel
 import com.semenovnikolay.clothingstore.databinding.AddClothingItemBinding
 import com.semenovnikolay.clothingstore.databinding.AddClothingItemBindingImpl
 
-class AddAdapter (private val context: Context,  private val names: List<String>) : RecyclerView.Adapter<AddAdapter.AddHolder>() {
+class AddAdapter
+    (private val context: Context/*,
+                  private val addCl: List<AddLocalModel>*/)
+    : RecyclerView.Adapter<AddAdapter.AddHolder>() {
 
     private var add = ArrayList<AddLocalModel>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddAdapter.AddHolder {
 
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = AddClothingItemBinding.inflate(LayoutInflater.from(context),parent,false)
-      //  val binding: AddClothingItemBindingImpl = DataBindingUtil.inflate(layoutInflater, R.layout.add_clothing_item, parent, false)
+      //  val binding = AddClothingItemBinding.inflate(LayoutInflater.from(context),parent,false)
+        val binding: AddClothingItemBinding = DataBindingUtil.inflate(layoutInflater, R.layout.add_clothing_item, parent, false)
         return AddHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: AddAdapter.AddHolder, position: Int) {
-        holder.bind(/*add*/names[position]/*, string*/)
+    override fun onBindViewHolder(holder: /*AddAdapter.*/AddHolder, position: Int) {
+        holder.bind(add[position])
     }
 
     override fun getItemCount(): Int {
-        return /*add*/names.size
+        return add.size
     }
 
     class AddHolder(val bind: AddClothingItemBinding) : RecyclerView.ViewHolder(bind.root) {
 
         private val binding : AddClothingItemBinding = bind
 
-        fun bind(list: String/*, string: String*/){
+        fun bind(list: AddLocalModel/*, string: String*/){
 
-            binding.foodItemNameTV.text = list
+            binding.foodItemNameTV.text = list.name
         }
 
+    }
+
+    fun setList(addLocalList: List<AddLocalModel>) {
+        add.clear()
+        add.addAll(addLocalList) // заполнение medications данными
     }
 
 

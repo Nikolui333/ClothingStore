@@ -5,6 +5,6 @@ import androidx.lifecycle.LiveData
 import com.semenovnikolay.clothingstore.data.models.AddLocalModel
 
 interface AddClothesCall {
-    fun loadMedicines(): LiveData<List<AddLocalModel>>
+    fun loadAddClothes(): LiveData<List<AddLocalModel>>
     suspend fun startMigration(context: Context)
 }

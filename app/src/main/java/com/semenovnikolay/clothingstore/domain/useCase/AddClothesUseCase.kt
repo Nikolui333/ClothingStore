@@ -10,7 +10,7 @@ class AddClothesUseCase (private val addClothesCall: AddClothesCall) {
     // получение даннх с локальной базы данных
     fun loadAddClothes(): LiveData<List<AddLocalModel>> {
 
-        return addClothesCall.loadMedicines()
+        return addClothesCall.loadAddClothes()
 
     }
     // запуск меграций

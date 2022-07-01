@@ -4,5 +4,6 @@ import androidx.lifecycle.LiveData
 import com.semenovnikolay.clothingstore.data.models.AddLocalModel
 
 interface AddClothesDataSource {
-    fun loadMedicines(): LiveData<List<AddLocalModel>>
+    fun insert(addLocalModel: AddLocalModel)
+    fun loadAddClothes(): LiveData<List<AddLocalModel>>
 }
