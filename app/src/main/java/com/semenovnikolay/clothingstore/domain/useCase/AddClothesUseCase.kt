@@ -4,6 +4,9 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import com.semenovnikolay.clothingstore.data.models.AddLocalModel
 import com.semenovnikolay.clothingstore.domain.repository.AddClothesCall
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class AddClothesUseCase (private val addClothesCall: AddClothesCall) {
 
@@ -18,5 +21,11 @@ class AddClothesUseCase (private val addClothesCall: AddClothesCall) {
 
         addClothesCall.startMigration(context)
 
+    }
+
+    // изменение размера одежды
+    suspend fun updateClothesSize(addLocalModel: AddLocalModel) {
+        CoroutineScope(Dispatchers.IO).launch {
+            addClothesCall.updateClothesSize(addLocalModel)}
     }
 }

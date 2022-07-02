@@ -1,10 +1,7 @@
 package com.semenovnikolay.clothingstore.data.localDB
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.semenovnikolay.clothingstore.data.models.AddLocalModel
 
 @Dao
@@ -15,4 +12,7 @@ interface AddClothesDAO {
 
     @Query("SELECT * FROM add_clothes_data_table")
     fun loadAddClothes(): LiveData<List<AddLocalModel>>
+
+    @Update
+    suspend fun updateClothesSize(addLocalModel: AddLocalModel)
 }

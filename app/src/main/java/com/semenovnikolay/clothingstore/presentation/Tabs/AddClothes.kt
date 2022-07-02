@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.semenovnikolay.clothingstore.R
 import com.semenovnikolay.clothingstore.databinding.FragmentAddClothesBinding
 import androidx.lifecycle.Observer
+import com.semenovnikolay.clothingstore.data.models.AddLocalModel
 import com.semenovnikolay.clothingstore.presentation.viewModel.AddClothesViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -18,8 +19,6 @@ class AddClothes : Fragment() {
 
     private var binding: FragmentAddClothesBinding? = null
     private var addAdapter : AddAdapter? = null
-/*    private var list : List<String> = listOf<String>("кот", "петжак", "кровать")
-    private var listText : List<String> = listOf<String>("лес", "книга", "стол")*/
 
     private val addClothesViewModel: AddClothesViewModel by viewModel()
 
@@ -49,7 +48,16 @@ class AddClothes : Fragment() {
     @SuppressLint("UseRequireInsteadOfGet")
     private fun setUpAdapter() {
         binding?.catalogClothes?.layoutManager = LinearLayoutManager(context)
-        addAdapter = AddAdapter(this.getActivity()!!/*,list*//*, listText*/)
+        addAdapter = AddAdapter(this.getActivity()!!,
+            { addLocalModel: AddLocalModel ->
+            lessSize(
+                addLocalModel
+            )
+        }, { addLocalModel: AddLocalModel ->
+            moreSize(
+                addLocalModel
+            )
+        })
 
         binding?.catalogClothes?.adapter = addAdapter
 
@@ -58,7 +66,15 @@ class AddClothes : Fragment() {
     private fun initRecyclerAddClothes(){
         binding?.catalogClothes?.layoutManager =
             LinearLayoutManager(context)
-        addAdapter = AddAdapter(this.requireActivity())
+        addAdapter = AddAdapter(this.requireActivity(), { addLocalModel: AddLocalModel ->
+            lessSize(
+                addLocalModel
+            )
+        }, { addLocalModel: AddLocalModel ->
+            moreSize(
+                addLocalModel
+            )
+        })
         binding?.catalogClothes?.adapter = addAdapter
 
     }
@@ -72,6 +88,42 @@ class AddClothes : Fragment() {
             // notifyDataSetChanged обновляет адаптер
             addAdapter?.notifyDataSetChanged()
         })
+    }
+
+    // уменьшение колличества единиц товара
+    private fun lessSize(addLocalModel:AddLocalModel) {
+
+        var size: Int = addLocalModel.size.toInt()
+        size--
+        if (size<40) { // если size<1 вывести 40
+            addClothesViewModel.updateClothesSize(
+                AddLocalModel(addLocalModel.id, addLocalModel.name,
+                    addLocalModel.image, addLocalModel.price, addLocalModel.description, addLocalModel.discount, addLocalModel.idProduct, "1",
+                    /*(addLocalModel.price.toInt()*40).toString()*/)
+            )
+
+        }
+        else {
+
+            addClothesViewModel.updateClothesSize(
+                AddLocalModel(addLocalModel.id, addLocalModel.name,
+                    addLocalModel.image, addLocalModel.price, addLocalModel.description, addLocalModel.discount, addLocalModel.idProduct, size.toString()
+                    /*(addLocalModel.price.toInt()*size).toString()*/)
+            )
+
+        }
+    }
+    // увеличение колличества единиц товара
+    private fun moreSize(addLocalModel:AddLocalModel) {
+
+        // получаем колличество товара
+        var size: Int = addLocalModel.size.toInt()
+        size++
+
+        addClothesViewModel.updateClothesSize(
+            AddLocalModel(addLocalModel.id, addLocalModel.name,
+                addLocalModel.image, addLocalModel.price, addLocalModel.description, addLocalModel.discount, addLocalModel.idProduct, size.toString()
+        ))
     }
 
 }

@@ -23,5 +23,12 @@ class AddLocalModel (
     val discount:String,
 
     @ColumnInfo(name = "add_clothes_price")
-    val price:String
+    val price:String,
+
+    @ColumnInfo(name = "card_idProduct")
+    val idProduct:String,
+
+    // размер одежды
+    @ColumnInfo(name = "clothing_size")
+    val size:String
     )

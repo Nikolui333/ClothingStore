@@ -38,7 +38,9 @@ class AddClothesApiDataSourceIMPL(private val addClothesDataSource: AddClothesDa
                             audit.image.toString(),
                             audit.description.toString(),
                             audit.discount.toString(),
-                            audit.price.toString()
+                            audit.price.toString(),
+                            "1",
+                            "40"
                         )
                     }?.let {
                         addClothesDataSource.insert(
