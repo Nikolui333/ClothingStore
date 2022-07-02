@@ -9,6 +9,8 @@ import com.semenovnikolay.clothingstore.R
 import com.semenovnikolay.clothingstore.data.models.AddLocalModel
 import com.semenovnikolay.clothingstore.databinding.AddClothingItemBinding
 import com.semenovnikolay.clothingstore.databinding.AddClothingItemBindingImpl
+import com.semenovnikolay.clothingstore.presentation.di.add
+import com.squareup.picasso.Picasso
 
 class AddAdapter
     (private val context: Context/*,
@@ -37,9 +39,17 @@ class AddAdapter
 
         private val binding : AddClothingItemBinding = bind
 
-        fun bind(list: AddLocalModel/*, string: String*/){
+        fun bind(addLocalModel: AddLocalModel/*, string: String*/){
+            // получаем ссылку на изображение
+            val getImage = addLocalModel.image
+            // получаем изображение, которое находится по ссылке и добавляем его в imageMedications
+            Picasso.get().load(getImage).into(binding.imageClothes)
+            binding.nameClothes.text = addLocalModel.name
+            binding.descriptionClothes.text = addLocalModel.description
+            binding.discountClothes.text = addLocalModel.discount
+            binding.priceClothes.text = addLocalModel.price
 
-            binding.foodItemNameTV.text = list.name
+
         }
 
     }
