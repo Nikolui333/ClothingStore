@@ -29,7 +29,7 @@ class AddAdapter
     }
 
     override fun onBindViewHolder(holder: AddHolder, position: Int) {
-        holder.bind(add[position], lessCount, moreCount)
+        holder.bind(add[position],moreCount, lessCount)
     }
 
     override fun getItemCount(): Int {

@@ -98,7 +98,7 @@ class AddClothes : Fragment() {
         if (size<1) { // если size<40 вывести 40
             addClothesViewModel.updateClothesSize(
                 AddLocalModel(addLocalModel.id, addLocalModel.name,
-                    addLocalModel.image, addLocalModel.price, addLocalModel.description, addLocalModel.discount, /*addLocalModel.idProduct,*/ "1"
+                    addLocalModel.image, addLocalModel.description, addLocalModel.discount, addLocalModel.price,  /*addLocalModel.idProduct,*/ "1"
                     /*(addLocalModel.price.toInt()*40).toString()*/)
             )
 
@@ -107,7 +107,7 @@ class AddClothes : Fragment() {
 
             addClothesViewModel.updateClothesSize(
                 AddLocalModel(addLocalModel.id, addLocalModel.name,
-                    addLocalModel.image, addLocalModel.price, addLocalModel.description, addLocalModel.discount,/* addLocalModel.idProduct,*/ size.toString()
+                    addLocalModel.image, addLocalModel.description, addLocalModel.discount, addLocalModel.price, /* addLocalModel.idProduct,*/ size.toString()
                     /*(addLocalModel.price.toInt()*size).toString()*/)
             )
 
@@ -132,7 +132,7 @@ class AddClothes : Fragment() {
 
         addClothesViewModel.updateClothesSize(
             AddLocalModel(addLocalModel.id, addLocalModel.name,
-                addLocalModel.image, addLocalModel.price, addLocalModel.description, addLocalModel.discount, /*addLocalModel.idProduct,*/ size.toString()
+                addLocalModel.image, addLocalModel.description, addLocalModel.discount, addLocalModel.price, /*addLocalModel.idProduct,*/ size.toString()
         ))
     }
 
