@@ -14,7 +14,7 @@ import com.semenovnikolay.clothingstore.presentation.di.add
 import com.squareup.picasso.Picasso
 
 class AddAdapter
-    (private val context: Context, private val lessCount:(AddLocalModel)->Unit,
+    (/*private val context: Context,*/ private val lessCount:(AddLocalModel)->Unit,
      private val moreCount:(AddLocalModel)->Unit)
     : RecyclerView.Adapter<AddAdapter.AddHolder>() {
 
@@ -49,6 +49,7 @@ class AddAdapter
             binding.descriptionClothes.text = addLocalModel.description
             binding.discountClothes.text = addLocalModel.discount
             binding.priceClothes.text = addLocalModel.price
+            binding.sizeClothes.text = addLocalModel.size
 
             binding.moreProductBasket.setOnClickListener(View.OnClickListener {
                 moreCount(addLocalModel) //увеличить колличество единиц товара

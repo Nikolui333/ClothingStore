@@ -45,10 +45,10 @@ class AddClothes : Fragment() {
     /*inflater.inflate(R.layout.fragment_add_clothes, container, false)*/
     }
 
-    @SuppressLint("UseRequireInsteadOfGet")
+  //  @SuppressLint("UseRequireInsteadOfGet")
     private fun setUpAdapter() {
         binding?.catalogClothes?.layoutManager = LinearLayoutManager(context)
-        addAdapter = AddAdapter(this.getActivity()!!,
+        addAdapter = AddAdapter(/*this.getActivity()!!,*/
             { addLocalModel: AddLocalModel ->
             lessSize(
                 addLocalModel
@@ -63,10 +63,10 @@ class AddClothes : Fragment() {
 
     }
 
-    private fun initRecyclerAddClothes(){
+/*    private fun initRecyclerAddClothes(){
         binding?.catalogClothes?.layoutManager =
             LinearLayoutManager(context)
-        addAdapter = AddAdapter(this.requireActivity(), { addLocalModel: AddLocalModel ->
+        addAdapter = AddAdapter(*//*this.requireActivity(),*//* { addLocalModel: AddLocalModel ->
             lessSize(
                 addLocalModel
             )
@@ -77,7 +77,7 @@ class AddClothes : Fragment() {
         })
         binding?.catalogClothes?.adapter = addAdapter
 
-    }
+    }*/
 
     private fun loadClothes() {
 
@@ -95,10 +95,10 @@ class AddClothes : Fragment() {
 
         var size: Int = addLocalModel.size.toInt()
         size--
-        if (size<40) { // если size<1 вывести 40
+        if (size<1) { // если size<40 вывести 40
             addClothesViewModel.updateClothesSize(
                 AddLocalModel(addLocalModel.id, addLocalModel.name,
-                    addLocalModel.image, addLocalModel.price, addLocalModel.description, addLocalModel.discount, addLocalModel.idProduct, "1",
+                    addLocalModel.image, addLocalModel.price, addLocalModel.description, addLocalModel.discount, /*addLocalModel.idProduct,*/ "1"
                     /*(addLocalModel.price.toInt()*40).toString()*/)
             )
 
@@ -107,7 +107,7 @@ class AddClothes : Fragment() {
 
             addClothesViewModel.updateClothesSize(
                 AddLocalModel(addLocalModel.id, addLocalModel.name,
-                    addLocalModel.image, addLocalModel.price, addLocalModel.description, addLocalModel.discount, addLocalModel.idProduct, size.toString()
+                    addLocalModel.image, addLocalModel.price, addLocalModel.description, addLocalModel.discount,/* addLocalModel.idProduct,*/ size.toString()
                     /*(addLocalModel.price.toInt()*size).toString()*/)
             )
 
@@ -116,13 +116,23 @@ class AddClothes : Fragment() {
     // увеличение колличества единиц товара
     private fun moreSize(addLocalModel:AddLocalModel) {
 
+/*        // получаем колличество товара
+        var count: Int = addLocalModel.size.toInt()
+        count++*/
+
+/*        addClothesViewModel.updateClothesSize(
+            AddLocalModel(addLocalModel.id, addLocalModel.name,
+                addLocalModel.image, addLocalModel.price, addLocalModel.description, addLocalModel.idProduct, count.toString(),
+                (addLocalModel.price.toInt()*count).toString())
+        )*/
+
         // получаем колличество товара
         var size: Int = addLocalModel.size.toInt()
         size++
 
         addClothesViewModel.updateClothesSize(
             AddLocalModel(addLocalModel.id, addLocalModel.name,
-                addLocalModel.image, addLocalModel.price, addLocalModel.description, addLocalModel.discount, addLocalModel.idProduct, size.toString()
+                addLocalModel.image, addLocalModel.price, addLocalModel.description, addLocalModel.discount, /*addLocalModel.idProduct,*/ size.toString()
         ))
     }
 
