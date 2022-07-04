@@ -9,12 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.semenovnikolay.clothingstore.R
 import com.semenovnikolay.clothingstore.data.models.AddLocalModel
 import com.semenovnikolay.clothingstore.databinding.AddClothingItemBinding
-import com.semenovnikolay.clothingstore.databinding.AddClothingItemBindingImpl
 import com.semenovnikolay.clothingstore.presentation.di.add
 import com.squareup.picasso.Picasso
 
 class AddAdapter
-    (/*private val context: Context,*/ private val lessCount:(AddLocalModel)->Unit,
+    (private val addToCard:(AddLocalModel)->Unit, private val lessCount:(AddLocalModel)->Unit,
      private val moreCount:(AddLocalModel)->Unit)
     : RecyclerView.Adapter<AddAdapter.AddHolder>() {
 
@@ -29,7 +28,7 @@ class AddAdapter
     }
 
     override fun onBindViewHolder(holder: AddHolder, position: Int) {
-        holder.bind(add[position],moreCount, lessCount)
+        holder.bind(add[position], addToCard, moreCount, lessCount)
     }
 
     override fun getItemCount(): Int {
@@ -40,7 +39,8 @@ class AddAdapter
 
         private val binding : AddClothingItemBinding = bind
 
-        fun bind(addLocalModel: AddLocalModel, moreCount: (/*CardModel*/AddLocalModel) -> Unit, lessCount: (/*CardModel*/AddLocalModel) -> Unit){
+        fun bind(addLocalModel: AddLocalModel, addToCard: (AddLocalModel) -> Unit,
+                 moreCount: (AddLocalModel) -> Unit, lessCount: (AddLocalModel) -> Unit){
             // получаем ссылку на изображение
             val getImage = addLocalModel.image
             // получаем изображение, которое находится по ссылке и добавляем его в imageMedications
@@ -50,6 +50,12 @@ class AddAdapter
             binding.discountClothes.text = addLocalModel.discount
             binding.priceClothes.text = addLocalModel.price
             binding.sizeClothes.text = addLocalModel.size
+
+            binding.addToCard.setOnClickListener(View.OnClickListener {
+
+                addToCard(addLocalModel)
+
+            })
 
             binding.moreProductBasket.setOnClickListener(View.OnClickListener {
                 moreCount(addLocalModel) //увеличить колличество единиц товара

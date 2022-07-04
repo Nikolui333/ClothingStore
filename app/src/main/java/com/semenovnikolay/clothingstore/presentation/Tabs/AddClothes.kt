@@ -13,6 +13,7 @@ import com.semenovnikolay.clothingstore.databinding.FragmentAddClothesBinding
 import androidx.lifecycle.Observer
 import com.semenovnikolay.clothingstore.data.models.AddLocalModel
 import com.semenovnikolay.clothingstore.presentation.viewModel.AddClothesViewModel
+import com.semenovnikolay.clothingstore.presentation.viewModel.CardViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AddClothes : Fragment() {
@@ -21,6 +22,7 @@ class AddClothes : Fragment() {
     private var addAdapter : AddAdapter? = null
 
     private val addClothesViewModel: AddClothesViewModel by viewModel()
+    private val cardViewModel: CardViewModel by viewModel()
 
 /*    override fun onCreate(inflater: LayoutInflater, container: ViewGroup?,
                           savedInstanceState: Bundle?): View? {
@@ -48,7 +50,11 @@ class AddClothes : Fragment() {
   //  @SuppressLint("UseRequireInsteadOfGet")
     private fun setUpAdapter() {
         binding?.catalogClothes?.layoutManager = LinearLayoutManager(context)
-        addAdapter = AddAdapter(/*this.getActivity()!!,*/
+        addAdapter = AddAdapter({ addLocalModel: AddLocalModel ->
+            addToCard(
+                addLocalModel
+            )
+        },
             { addLocalModel: AddLocalModel ->
             lessSize(
                 addLocalModel
@@ -62,22 +68,6 @@ class AddClothes : Fragment() {
         binding?.catalogClothes?.adapter = addAdapter
 
     }
-
-/*    private fun initRecyclerAddClothes(){
-        binding?.catalogClothes?.layoutManager =
-            LinearLayoutManager(context)
-        addAdapter = AddAdapter(*//*this.requireActivity(),*//* { addLocalModel: AddLocalModel ->
-            lessSize(
-                addLocalModel
-            )
-        }, { addLocalModel: AddLocalModel ->
-            moreSize(
-                addLocalModel
-            )
-        })
-        binding?.catalogClothes?.adapter = addAdapter
-
-    }*/
 
     private fun loadClothes() {
 
@@ -113,6 +103,18 @@ class AddClothes : Fragment() {
 
         }
     }
+
+    // добавление товара в корзину
+    private fun addToCard(addLocalModel: AddLocalModel) {
+        cardViewModel.startInsert(addLocalModel.name,
+            addLocalModel.image,
+            addLocalModel.price,
+            addLocalModel.id.toString(),
+            "1",
+            addLocalModel.size
+        )
+    }
+
     // увеличение колличества единиц товара
     private fun moreSize(addLocalModel:AddLocalModel) {
 
