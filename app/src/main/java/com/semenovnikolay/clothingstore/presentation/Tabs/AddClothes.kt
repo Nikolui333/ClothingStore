@@ -110,7 +110,7 @@ class AddClothes : Fragment() {
             addLocalModel.image,
             addLocalModel.price,
             addLocalModel.id.toString(),
-            "1",
+            /*"1",*/
             addLocalModel.size
         )
     }
