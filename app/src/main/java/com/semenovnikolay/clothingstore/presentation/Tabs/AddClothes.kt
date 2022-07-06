@@ -47,6 +47,10 @@ class AddClothes : Fragment() {
             addToCard(
                 addLocalModel
             )
+        }, { addLocalModel: AddLocalModel ->
+            removeFromCard(
+                addLocalModel
+            )
         },
             { addLocalModel: AddLocalModel ->
             lessSize(
@@ -106,6 +110,11 @@ class AddClothes : Fragment() {
             /*"1",*/
             addLocalModel.size
         )
+    }
+
+    // удаление товара из корзины
+    private fun removeFromCard(addLocalModel: AddLocalModel) {
+        cardViewModel.deleteProductToCardFromCardProduct(addLocalModel.id.toString())
     }
 
 /*    fun onClickAddToCard(){

@@ -20,11 +20,6 @@ class ShoppingCart : Fragment()/*,View.OnClickListener*/ {
     private var cardAdapter: ShoppingCartAdapter? = null
     private val cardViewModel: CardViewModel by viewModel()
 
-/*    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }*/
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,13 +50,6 @@ class ShoppingCart : Fragment()/*,View.OnClickListener*/ {
         cardViewModel.loadClothesFromCard.observe(viewLifecycleOwner, Observer {
             cardAdapter?.setList(it)
             cardAdapter?.notifyDataSetChanged()
-            // сложение суммарных стоимостей каждого товара (sumOf - суммировать всё)
-           // val total:Int = it.sumOf<CardModel>
-/*            // суммировать поля totalPrice
-            { it.totalPrice.toInt() }*/
-
-          //  binding?.totalOrder?.text = total.toString()
-
         })
     }
 

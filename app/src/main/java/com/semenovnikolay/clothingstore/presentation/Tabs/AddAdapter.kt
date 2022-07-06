@@ -13,7 +13,7 @@ import com.semenovnikolay.clothingstore.presentation.di.add
 import com.squareup.picasso.Picasso
 
 class AddAdapter
-    (private val addToCard:(AddLocalModel)->Unit, private val lessCount:(AddLocalModel)->Unit,
+    (private val addToCard:(AddLocalModel)->Unit, private val removeFromCard:(AddLocalModel)->Unit, private val lessCount:(AddLocalModel)->Unit,
      private val moreCount:(AddLocalModel)->Unit)
     : RecyclerView.Adapter<AddAdapter.AddHolder>() {
 
@@ -28,7 +28,7 @@ class AddAdapter
     }
 
     override fun onBindViewHolder(holder: AddHolder, position: Int) {
-        holder.bind(add[position], addToCard, moreCount, lessCount)
+        holder.bind(add[position], addToCard, removeFromCard, moreCount, lessCount)
     }
 
     override fun getItemCount(): Int {
@@ -39,7 +39,7 @@ class AddAdapter
 
         private val binding : AddClothingItemBinding = bind
 
-        fun bind(addLocalModel: AddLocalModel, addToCard: (AddLocalModel) -> Unit,
+        fun bind(addLocalModel: AddLocalModel, addToCard: (AddLocalModel) -> Unit, removeFromCard: (AddLocalModel) -> Unit,
                  moreCount: (AddLocalModel) -> Unit, lessCount: (AddLocalModel) -> Unit){
             // получаем ссылку на изображение
             val getImage = addLocalModel.image
@@ -59,10 +59,15 @@ class AddAdapter
 
             })
 
+            binding.removeFromCard.setOnClickListener(View.OnClickListener {
+
+                removeFromCard(addLocalModel)
+
+            })
+
             binding.moreProductBasket.setOnClickListener(View.OnClickListener {
                 moreCount(addLocalModel) //увеличить колличество единиц товара
-
-             // addToCard(addLocalModel)
+                
             })
 
             binding.lessProductBasket.setOnClickListener(View.OnClickListener {
