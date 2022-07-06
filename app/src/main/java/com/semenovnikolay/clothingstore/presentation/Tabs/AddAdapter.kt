@@ -53,13 +53,16 @@ class AddAdapter
 
             binding.addToCard.setOnClickListener(View.OnClickListener {
 
-                addToCard(addLocalModel)
+                addToCard.invoke(addLocalModel)
+
+              // lessCount(addLocalModel)
 
             })
 
             binding.moreProductBasket.setOnClickListener(View.OnClickListener {
                 moreCount(addLocalModel) //увеличить колличество единиц товара
 
+             // addToCard(addLocalModel)
             })
 
             binding.lessProductBasket.setOnClickListener(View.OnClickListener {

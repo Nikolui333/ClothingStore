@@ -24,13 +24,6 @@ class AddClothes : Fragment() {
     private val addClothesViewModel: AddClothesViewModel by viewModel()
     private val cardViewModel: CardViewModel by viewModel()
 
-/*    override fun onCreate(inflater: LayoutInflater, container: ViewGroup?,
-                          savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_clothes, container, false)
-
-        return binding?.root
-    }*/
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -115,18 +108,12 @@ class AddClothes : Fragment() {
         )
     }
 
+/*    fun onClickAddToCard(){
+        addToCard(addLocalModel)
+    }*/
+
     // увеличение колличества единиц товара
     private fun moreSize(addLocalModel:AddLocalModel) {
-
-/*        // получаем колличество товара
-        var count: Int = addLocalModel.size.toInt()
-        count++*/
-
-/*        addClothesViewModel.updateClothesSize(
-            AddLocalModel(addLocalModel.id, addLocalModel.name,
-                addLocalModel.image, addLocalModel.price, addLocalModel.description, addLocalModel.idProduct, count.toString(),
-                (addLocalModel.price.toInt()*count).toString())
-        )*/
 
         // получаем колличество товара
         var size: Int = addLocalModel.size.toInt()

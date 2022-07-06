@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import com.semenovnikolay.clothingstore.R
 import com.semenovnikolay.clothingstore.databinding.FragmentShoppingCartBinding
 import com.semenovnikolay.clothingstore.presentation.viewModel.CardViewModel
@@ -29,12 +30,13 @@ class ShoppingCart : Fragment()/*,View.OnClickListener*/ {
         savedInstanceState: Bundle?
     ): View? {
 
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_shopping_cart, container, false)
         initRecyclerCard()
         loadClothesFromCard()
 
-
+        return binding?.root
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shopping_cart, container, false)
+       // return inflater.inflate(R.layout.fragment_shopping_cart, container, false)
     }
 
     // инициализация
