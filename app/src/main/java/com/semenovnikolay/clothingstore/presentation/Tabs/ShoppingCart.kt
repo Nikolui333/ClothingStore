@@ -40,7 +40,11 @@ class ShoppingCart : Fragment()/*,View.OnClickListener*/ {
         binding?.listCard?.layoutManager =
             LinearLayoutManager(context)
         cardAdapter =
-            ShoppingCartAdapter ()
+            ShoppingCartAdapter ({ cardModel: CardModel ->
+                deleteFromCard(
+                    cardModel
+                )
+            })
         binding?.listCard?.adapter = cardAdapter
     }
 
@@ -51,6 +55,11 @@ class ShoppingCart : Fragment()/*,View.OnClickListener*/ {
             cardAdapter?.setList(it)
             cardAdapter?.notifyDataSetChanged()
         })
+    }
+
+    private fun deleteFromCard(cardModel: CardModel){
+
+        cardViewModel.deleteProductFromCard(cardModel.id)
     }
 
 }

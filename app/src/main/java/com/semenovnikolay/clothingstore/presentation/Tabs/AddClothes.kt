@@ -1,11 +1,11 @@
 package com.semenovnikolay.clothingstore.presentation.Tabs
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.semenovnikolay.clothingstore.R
@@ -43,26 +43,33 @@ class AddClothes : Fragment() {
   //  @SuppressLint("UseRequireInsteadOfGet")
     private fun setUpAdapter() {
         binding?.catalogClothes?.layoutManager = LinearLayoutManager(context)
-        addAdapter = AddAdapter({ addLocalModel: AddLocalModel ->
+        addAdapter = AddAdapter({ addLocalModel: AddLocalModel/*, addToBasket: AppCompatImageButton,
+                                  removeFromBasket: AppCompatImageButton*/ ->
             addToCard(
-                addLocalModel
+                addLocalModel/*, addToBasket, removeFromBasket*/
             )
         }, { addLocalModel: AddLocalModel ->
             removeFromCard(
                 addLocalModel
             )
         },
+            { idProduct:Int, addToBasket: AppCompatImageButton,
+              removeFromBasket: AppCompatImageButton ->
+                loadClothesToCardFromCardProduct(
+                    idProduct, addToBasket, removeFromBasket
+                )
+            },
             { addLocalModel: AddLocalModel ->
             lessSize(
                 addLocalModel
             )
-        }, { addLocalModel: AddLocalModel ->
+        }) { addLocalModel: AddLocalModel ->
             moreSize(
                 addLocalModel
             )
-        })
+        }
 
-        binding?.catalogClothes?.adapter = addAdapter
+      binding?.catalogClothes?.adapter = addAdapter
 
     }
 
@@ -102,7 +109,9 @@ class AddClothes : Fragment() {
     }
 
     // добавление товара в корзину
-    private fun addToCard(addLocalModel: AddLocalModel) {
+    private fun addToCard(addLocalModel: AddLocalModel/*, addToBasket: AppCompatImageButton,
+                          removeFromBasket: AppCompatImageButton*/
+    ) {
         cardViewModel.startInsert(addLocalModel.name,
             addLocalModel.image,
             addLocalModel.price,
@@ -110,11 +119,34 @@ class AddClothes : Fragment() {
             /*"1",*/
             addLocalModel.size
         )
+/*        addToBasket.visibility = View.GONE
+        removeFromBasket.visibility = View.VISIBLE*/
     }
 
     // удаление товара из корзины
     private fun removeFromCard(addLocalModel: AddLocalModel) {
         cardViewModel.deleteProductToCardFromCardProduct(addLocalModel.id.toString())
+    }
+
+    private fun loadClothesToCardFromCardProduct (idProduct:Int, addToBasket: AppCompatImageButton,
+                                                   removeFromBasket: AppCompatImageButton
+    ){
+        // передаём id, который приходит из адаптера
+        cardViewModel.loadMedicineToCardFromCardProduct(idProduct.toString()).observe(viewLifecycleOwner, Observer {
+
+            // в переменную count получаем колличество товара
+            val count = it.count() // it - это неявное имя одного параметра в лямбда-функции
+
+            // если колличество больше нуля, убрать кнопку добавления и отобразить кнопку удаления
+            if (count>0) {
+                addToBasket.visibility = View.GONE
+                removeFromBasket.visibility = View.VISIBLE
+            }
+            else {
+                addToBasket.visibility = View.VISIBLE
+                removeFromBasket.visibility = View.GONE }
+        })
+
     }
 
 /*    fun onClickAddToCard(){

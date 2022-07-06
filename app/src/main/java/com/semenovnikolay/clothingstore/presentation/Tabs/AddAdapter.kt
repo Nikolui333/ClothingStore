@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.semenovnikolay.clothingstore.R
@@ -12,9 +13,10 @@ import com.semenovnikolay.clothingstore.databinding.AddClothingItemBinding
 import com.semenovnikolay.clothingstore.presentation.di.add
 import com.squareup.picasso.Picasso
 
-class AddAdapter
-    (private val addToCard:(AddLocalModel)->Unit, private val removeFromCard:(AddLocalModel)->Unit, private val lessCount:(AddLocalModel)->Unit,
-     private val moreCount:(AddLocalModel)->Unit)
+class AddAdapter(private val addToCard: (AddLocalModel/*, AppCompatImageButton, AppCompatImageButton*/) -> Unit, private val removeFromCard:(AddLocalModel)->Unit,
+                 private val loadClothesToCardFromCardProduct:(Int, AppCompatImageButton, AppCompatImageButton)->Unit,
+                 private val lessCount: (AddLocalModel) -> Unit,
+                 private val moreCount:(AddLocalModel)->Unit)
     : RecyclerView.Adapter<AddAdapter.AddHolder>() {
 
     private var add = ArrayList<AddLocalModel>()
@@ -28,7 +30,7 @@ class AddAdapter
     }
 
     override fun onBindViewHolder(holder: AddHolder, position: Int) {
-        holder.bind(add[position], addToCard, removeFromCard, moreCount, lessCount)
+        holder.bind(add[position], addToCard, removeFromCard, loadClothesToCardFromCardProduct, moreCount, lessCount)
     }
 
     override fun getItemCount(): Int {
@@ -39,7 +41,9 @@ class AddAdapter
 
         private val binding : AddClothingItemBinding = bind
 
-        fun bind(addLocalModel: AddLocalModel, addToCard: (AddLocalModel) -> Unit, removeFromCard: (AddLocalModel) -> Unit,
+        fun bind(addLocalModel: AddLocalModel, addToCard: (AddLocalModel/*, AppCompatImageButton, AppCompatImageButton*/) -> Unit,
+                 removeFromCard: (AddLocalModel) -> Unit,
+                 loadClothesToCardFromCardProduct: (Int, AppCompatImageButton, AppCompatImageButton) -> Unit,
                  moreCount: (AddLocalModel) -> Unit, lessCount: (AddLocalModel) -> Unit){
             // получаем ссылку на изображение
             val getImage = addLocalModel.image
@@ -53,9 +57,7 @@ class AddAdapter
 
             binding.addToCard.setOnClickListener(View.OnClickListener {
 
-                addToCard.invoke(addLocalModel)
-
-              // lessCount(addLocalModel)
+                addToCard.invoke(addLocalModel/*, binding.addToCard, binding.removeFromCard*/)
 
             })
 
@@ -65,9 +67,11 @@ class AddAdapter
 
             })
 
+            loadClothesToCardFromCardProduct(addLocalModel.id, binding.addToCard, binding.removeFromCard)
+
             binding.moreProductBasket.setOnClickListener(View.OnClickListener {
                 moreCount(addLocalModel) //увеличить колличество единиц товара
-                
+
             })
 
             binding.lessProductBasket.setOnClickListener(View.OnClickListener {

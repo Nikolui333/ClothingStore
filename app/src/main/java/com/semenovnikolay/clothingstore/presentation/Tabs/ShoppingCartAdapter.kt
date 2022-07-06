@@ -10,7 +10,7 @@ import com.semenovnikolay.clothingstore.data.models.CardModel
 import com.semenovnikolay.clothingstore.databinding.CardItemBinding
 import com.squareup.picasso.Picasso
 
-class ShoppingCartAdapter() :
+class ShoppingCartAdapter(private val deleteFromCard:(CardModel)->Unit) :
     RecyclerView.Adapter<ShoppingCartAdapter.CardHolder>() {
 
     private val productsFromCard = ArrayList<CardModel>()
@@ -28,8 +28,7 @@ class ShoppingCartAdapter() :
     }
 
     override fun onBindViewHolder(holder: CardHolder, position: Int) {
-        holder.bind(productsFromCard[position]/*, deleteFromCard,
-            moreCount, lessCount*/)
+        holder.bind(productsFromCard[position], deleteFromCard)
 
     }
 
@@ -42,8 +41,7 @@ class ShoppingCartAdapter() :
     class CardHolder(val binding: CardItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(
-            cardModel: CardModel/*, deleteFromCard: (CardModel) -> Unit,
-            moreCount: (CardModel) -> Unit, lessCount: (CardModel) -> Unit*/
+            cardModel: CardModel, deleteFromCard: (CardModel) -> Unit
         ) {
 
             val getImage = cardModel.image
@@ -53,9 +51,9 @@ class ShoppingCartAdapter() :
             binding.priceProductCard.text = cardModel.price
            // binding.totalPriceProductCard.text = cardModel.totalPrice
 
-/*            binding.removeFromCardProductCard.setOnClickListener(View.OnClickListener {
+            binding.removeFromCardProductCard.setOnClickListener(View.OnClickListener {
                 deleteFromCard(cardModel) // удаление из карточки, когда пользоваетль находится в корзине
-            })*/
+            })
 
         }
     }
