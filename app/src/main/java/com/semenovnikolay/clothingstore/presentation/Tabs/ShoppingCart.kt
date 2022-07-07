@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentActivity
 import com.semenovnikolay.clothingstore.R
 import com.semenovnikolay.clothingstore.databinding.FragmentShoppingCartBinding
 import com.semenovnikolay.clothingstore.presentation.viewModel.CardViewModel
@@ -29,10 +30,58 @@ class ShoppingCart : Fragment()/*,View.OnClickListener*/ {
         initRecyclerCard()
         loadClothesFromCard()
 
+        binding?.clearCard?.setOnClickListener {
+         /*   when(view?.id) {
+                // очистка корзины
+                R.id.clearCard ->*/ cardViewModel.clearCard()
+
+                // отправка заказа
+/*            R.id.checkoutCard -> {
+                // запуск фрагмента (выезжающей панели) для ввода данных пользователя
+                val checkout = Checkout()
+                checkout.show((context as FragmentActivity).supportFragmentManager, "checkout")
+
+            }*/
+          //  }
+        }
+
         return binding?.root
         // Inflate the layout for this fragment
        // return inflater.inflate(R.layout.fragment_shopping_cart, container, false)
     }
+
+/*    // обработка кликов по кнопкам
+    override fun onClick(view: View) {
+      //  loadClothesFromCard()
+        when(view?.id) {
+            // очистка корзины
+            R.id.clearCard -> cardViewModel.clearCard()
+
+            // отправка заказа
+*//*            R.id.checkoutCard -> {
+                // запуск фрагмента (выезжающей панели) для ввода данных пользователя
+                val checkout = Checkout()
+                checkout.show((context as FragmentActivity).supportFragmentManager, "checkout")
+
+            }*//*
+        }
+    }
+
+
+    fun clearCardInClick(view: View) {
+        when(view?.id) {
+            // очистка корзины
+            R.id.clearCard -> cardViewModel.clearCard()
+
+            // отправка заказа
+*//*            R.id.checkoutCard -> {
+                // запуск фрагмента (выезжающей панели) для ввода данных пользователя
+                val checkout = Checkout()
+                checkout.show((context as FragmentActivity).supportFragmentManager, "checkout")
+
+            }*//*
+        }
+    }*/
 
     // инициализация
     private fun initRecyclerCard() {
@@ -40,11 +89,11 @@ class ShoppingCart : Fragment()/*,View.OnClickListener*/ {
         binding?.listCard?.layoutManager =
             LinearLayoutManager(context)
         cardAdapter =
-            ShoppingCartAdapter ({ cardModel: CardModel ->
+            ShoppingCartAdapter { cardModel: CardModel ->
                 deleteFromCard(
                     cardModel
                 )
-            })
+            }
         binding?.listCard?.adapter = cardAdapter
     }
 
@@ -61,5 +110,7 @@ class ShoppingCart : Fragment()/*,View.OnClickListener*/ {
 
         cardViewModel.deleteProductFromCard(cardModel.id)
     }
+
+
 
 }

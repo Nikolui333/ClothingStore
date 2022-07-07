@@ -13,12 +13,12 @@ interface ApiInterface {
     @GET("loadClothes.php")
     fun loadMedicinesApi(): Call<ArrayList<AddApiModel>>
 
-/*    @FormUrlEncoded
+    @FormUrlEncoded
     @POST("insert.php")
     fun insert(
         @Field("name") name: String?,
         @Field("phone") phone: String?,
         @Field("description") description: String?,
         @Field("priceOrder") priceOrder: String?,
-    ): Call<ResponseBody?>?*/
+    ): Call<ResponseBody?>?
 }

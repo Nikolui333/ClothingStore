@@ -21,7 +21,7 @@
                 android:layout_margin = "20dp"
                 android:background="@color/orange"
                 android:textColor="@color/black"
-                android:text="@string/clearCard"/>
+                android:text="@string/clearCard" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/listCard"

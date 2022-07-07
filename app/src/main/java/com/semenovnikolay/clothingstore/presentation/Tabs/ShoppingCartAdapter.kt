@@ -49,7 +49,6 @@ class ShoppingCartAdapter(private val deleteFromCard:(CardModel)->Unit) :
             binding.nameProductCard.text = cardModel.name
             binding.sizeProductInBasket.text = cardModel.size
             binding.priceProductCard.text = cardModel.price
-           // binding.totalPriceProductCard.text = cardModel.totalPrice
 
             binding.removeFromCardProductCard.setOnClickListener(View.OnClickListener {
                 deleteFromCard(cardModel) // удаление из карточки, когда пользоваетль находится в корзине

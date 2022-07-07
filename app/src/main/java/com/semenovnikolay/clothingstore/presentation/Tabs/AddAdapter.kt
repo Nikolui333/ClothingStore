@@ -41,13 +41,13 @@ class AddAdapter(private val addToCard: (AddLocalModel/*, AppCompatImageButton, 
 
         private val binding : AddClothingItemBinding = bind
 
-        fun bind(addLocalModel: AddLocalModel, addToCard: (AddLocalModel/*, AppCompatImageButton, AppCompatImageButton*/) -> Unit,
+        fun bind(addLocalModel: AddLocalModel, addToCard: (AddLocalModel) -> Unit,
                  removeFromCard: (AddLocalModel) -> Unit,
                  loadClothesToCardFromCardProduct: (Int, AppCompatImageButton, AppCompatImageButton) -> Unit,
                  moreCount: (AddLocalModel) -> Unit, lessCount: (AddLocalModel) -> Unit){
             // получаем ссылку на изображение
             val getImage = addLocalModel.image
-            // получаем изображение, которое находится по ссылке и добавляем его в imageMedications
+            // получаем изображение, которое находится по ссылке и добавляем его в imageClothes
             Picasso.get().load(getImage).into(binding.imageClothes)
             binding.nameClothes.text = addLocalModel.name
             binding.descriptionClothes.text = addLocalModel.description
@@ -57,7 +57,7 @@ class AddAdapter(private val addToCard: (AddLocalModel/*, AppCompatImageButton, 
 
             binding.addToCard.setOnClickListener(View.OnClickListener {
 
-                addToCard.invoke(addLocalModel/*, binding.addToCard, binding.removeFromCard*/)
+                addToCard.invoke(addLocalModel)
 
             })
 
@@ -84,7 +84,7 @@ class AddAdapter(private val addToCard: (AddLocalModel/*, AppCompatImageButton, 
 
     fun setList(addLocalList: List<AddLocalModel>) {
         add.clear()
-        add.addAll(addLocalList) // заполнение medications данными
+        add.addAll(addLocalList) // заполнение add данными
     }
 
 
