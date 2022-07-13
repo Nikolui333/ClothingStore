@@ -5,7 +5,7 @@ import com.semenovnikolay.clothingstore.data.dataSource.AddClothesApiDataSource
 import com.semenovnikolay.clothingstore.data.dataSource.AddClothesDataSource
 import com.semenovnikolay.clothingstore.data.dataSourceIMPL.AddClothesApiDataSourceIMPL
 import com.semenovnikolay.clothingstore.data.dataSourceIMPL.AddClothesDataSourceIMPL
-import com.semenovnikolay.clothingstore.data.localDB.TempClothesDB
+import com.semenovnikolay.clothingstore.data.localDB.ClothesLocalDataBase
 import com.semenovnikolay.clothingstore.data.repository.AddClothesRepository
 import com.semenovnikolay.clothingstore.data.repository.CardRepository
 import com.semenovnikolay.clothingstore.domain.repository.AddClothesCall
@@ -21,11 +21,11 @@ import org.koin.dsl.module
 val add = module{
 
     single {
-        Room.databaseBuilder(androidContext(), TempClothesDB::class.java,
+        Room.databaseBuilder(androidContext(), ClothesLocalDataBase::class.java,
             "dbC").build()
     }
 
-    single { get<TempClothesDB>().addClothesDAO }
+    single { get<ClothesLocalDataBase>().addClothesDAO }
 
 
     single<AddClothesDataSource> {
@@ -51,11 +51,11 @@ val add = module{
 val card = module{
 
     single {
-        Room.databaseBuilder(androidContext(), TempClothesDB::class.java,
+        Room.databaseBuilder(androidContext(), ClothesLocalDataBase::class.java,
             "dbO").build()
     }
 
-    single { get<TempClothesDB>().cardDao }
+    single { get<ClothesLocalDataBase>().cardDao }
 
     single<CardCall> { CardRepository(get()) }
 
