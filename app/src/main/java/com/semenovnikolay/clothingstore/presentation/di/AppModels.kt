@@ -6,14 +6,19 @@ import com.semenovnikolay.clothingstore.data.dataSource.AddClothesDataSource
 import com.semenovnikolay.clothingstore.data.dataSourceIMPL.AddClothesApiDataSourceIMPL
 import com.semenovnikolay.clothingstore.data.dataSourceIMPL.AddClothesDataSourceIMPL
 import com.semenovnikolay.clothingstore.data.localDB.ClothesLocalDataBase
+import com.semenovnikolay.clothingstore.data.models.FavoriteModel
 import com.semenovnikolay.clothingstore.data.repository.AddClothesRepository
 import com.semenovnikolay.clothingstore.data.repository.CardRepository
+import com.semenovnikolay.clothingstore.data.repository.FavoriteRepository
 import com.semenovnikolay.clothingstore.domain.repository.AddClothesCall
 import com.semenovnikolay.clothingstore.domain.repository.CardCall
+import com.semenovnikolay.clothingstore.domain.repository.FavoriteCall
 import com.semenovnikolay.clothingstore.domain.useCase.AddClothesUseCase
 import com.semenovnikolay.clothingstore.domain.useCase.CardUseCase
+import com.semenovnikolay.clothingstore.domain.useCase.FavoriteUseCase
 import com.semenovnikolay.clothingstore.presentation.viewModel.AddClothesViewModel
 import com.semenovnikolay.clothingstore.presentation.viewModel.CardViewModel
+import com.semenovnikolay.clothingstore.presentation.viewModel.FavoriteViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -62,5 +67,22 @@ val card = module{
     single { CardUseCase(get()) }
 
     viewModel { CardViewModel(get()) }
+
+}
+
+val favorite = module{
+
+    single {
+        Room.databaseBuilder(androidContext(), ClothesLocalDataBase::class.java,
+            "dbO").build()
+    }
+
+    single { get<ClothesLocalDataBase>().favoriteDAO }
+
+    single<FavoriteCall> { FavoriteRepository(get()) }
+
+    single { FavoriteUseCase(get()) }
+
+    viewModel { FavoriteViewModel(get()) }
 
 }

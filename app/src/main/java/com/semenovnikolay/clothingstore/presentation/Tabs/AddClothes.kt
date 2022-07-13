@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import com.semenovnikolay.clothingstore.data.models.AddLocalModel
 import com.semenovnikolay.clothingstore.presentation.viewModel.AddClothesViewModel
 import com.semenovnikolay.clothingstore.presentation.viewModel.CardViewModel
+import com.semenovnikolay.clothingstore.presentation.viewModel.FavoriteViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AddClothes : Fragment() {
@@ -23,6 +24,7 @@ class AddClothes : Fragment() {
 
     private val addClothesViewModel: AddClothesViewModel by viewModel()
     private val cardViewModel: CardViewModel by viewModel()
+    private val favoriteViewModel: FavoriteViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -92,8 +94,7 @@ class AddClothes : Fragment() {
         if (size<1) { // если size<40 вывести 40
             addClothesViewModel.updateClothesSize(
                 AddLocalModel(addLocalModel.id, addLocalModel.name,
-                    addLocalModel.image, addLocalModel.description, addLocalModel.discount, addLocalModel.price,  /*addLocalModel.idProduct,*/ "1"
-                    /*(addLocalModel.price.toInt()*40).toString()*/)
+                    addLocalModel.image, addLocalModel.description, addLocalModel.discount, addLocalModel.price, "1")
             )
 
         }
@@ -101,8 +102,7 @@ class AddClothes : Fragment() {
 
             addClothesViewModel.updateClothesSize(
                 AddLocalModel(addLocalModel.id, addLocalModel.name,
-                    addLocalModel.image, addLocalModel.description, addLocalModel.discount, addLocalModel.price, /* addLocalModel.idProduct,*/ size.toString()
-                    /*(addLocalModel.price.toInt()*size).toString()*/)
+                    addLocalModel.image, addLocalModel.description, addLocalModel.discount, addLocalModel.price, size.toString())
             )
 
         }
@@ -110,6 +110,21 @@ class AddClothes : Fragment() {
 
     // добавление товара в корзину
     private fun addToCard(addLocalModel: AddLocalModel/*, addToBasket: AppCompatImageButton,
+                          removeFromBasket: AppCompatImageButton*/
+    ) {
+        cardViewModel.startInsert(addLocalModel.name,
+            addLocalModel.image,
+            addLocalModel.price,
+            addLocalModel.id.toString(),
+            /*"1",*/
+            addLocalModel.size
+        )
+/*        addToBasket.visibility = View.GONE
+        removeFromBasket.visibility = View.VISIBLE*/
+    }
+
+    // добавление товара в корзину
+    private fun addToFavorite(addLocalModel: AddLocalModel/*, addToBasket: AppCompatImageButton,
                           removeFromBasket: AppCompatImageButton*/
     ) {
         cardViewModel.startInsert(addLocalModel.name,

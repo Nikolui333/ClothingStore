@@ -86,6 +86,4 @@ class AddAdapter(private val addToCard: (AddLocalModel/*, AppCompatImageButton, 
         add.clear()
         add.addAll(addLocalList) // заполнение add данными
     }
-
-
 }
