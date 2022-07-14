@@ -1,6 +1,7 @@
 package com.semenovnikolay.clothingstore.presentation.Tabs
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -10,7 +11,7 @@ import com.semenovnikolay.clothingstore.data.models.FavoriteModel
 import com.semenovnikolay.clothingstore.databinding.FavoriteItemBinding
 import com.squareup.picasso.Picasso
 
-class FavoriteAdapter :
+class FavoriteAdapter(private val deleteFromFavorite:(FavoriteModel)->Unit) :
     RecyclerView.Adapter<FavoriteAdapter.FavoriteHolder>() {
 
     private val productsFromFavorite = ArrayList<FavoriteModel>()
@@ -18,7 +19,7 @@ class FavoriteAdapter :
     class FavoriteHolder(val binding: FavoriteItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(
-            favoriteModel: FavoriteModel, /*deleteFromCard: (FavoriteModel) -> Unit*/
+            favoriteModel: FavoriteModel, deleteFromFavorite: (FavoriteModel) -> Unit
         ) {
 
             val getImage = favoriteModel.image
@@ -30,11 +31,10 @@ class FavoriteAdapter :
             binding.priceClothes
             /*priceProductCard*/.text = favoriteModel.price
 
-       /*     binding.
-            removeFromCardProductCard.setOnClickListener(View.OnClickListener {
-                deleteFromCard(cardModel) // удаление из карточки, когда пользоваетль находится в корзине
+            binding.
+            removeFavorite.setOnClickListener(View.OnClickListener {
+                deleteFromFavorite(favoriteModel) // удаление из карточки, когда пользоваетль находится во вкладке избранное
             })
-*/
         }
     }
 
@@ -46,7 +46,7 @@ class FavoriteAdapter :
     }
 
     override fun onBindViewHolder(holder: FavoriteHolder, position: Int) {
-        holder.bind(productsFromFavorite[position]/*, deleteFromCard*/)
+        holder.bind(productsFromFavorite[position], deleteFromFavorite)
     }
 
     override fun getItemCount(): Int {

@@ -13,6 +13,7 @@ import com.semenovnikolay.clothingstore.databinding.FragmentFavoriteBinding
 import com.semenovnikolay.clothingstore.presentation.viewModel.FavoriteViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import androidx.lifecycle.Observer
+import com.semenovnikolay.clothingstore.data.models.FavoriteModel
 
 class Favorite : Fragment() {
 
@@ -39,11 +40,11 @@ class Favorite : Fragment() {
         binding?.catalogClothes?.layoutManager =
             LinearLayoutManager(context)
         favoriteAdapter =
-            FavoriteAdapter() /*{ cardModel: CardModel ->
-                deleteFromCard(
-                    cardModel
+            FavoriteAdapter { favoriteModel: FavoriteModel ->
+                deleteFromFavorite(
+                    favoriteModel
                 )
-            }*/
+            }
         binding?.catalogClothes?.adapter = favoriteAdapter
     }
 
@@ -53,5 +54,10 @@ class Favorite : Fragment() {
             favoriteAdapter?.setList(it)
             favoriteAdapter?.notifyDataSetChanged()
         })
+    }
+
+    private fun deleteFromFavorite(favoriteModel: FavoriteModel){
+
+        favoriteViewModel.deleteProductFromCard(favoriteModel.id)
     }
 }
