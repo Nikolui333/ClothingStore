@@ -37,30 +37,11 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/imageClothes"/>
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/descriptionClothes"
-                android:layout_width="240dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/nameClothes"
-                app:layout_constraintLeft_toRightOf="@id/imageClothes"
-                android:layout_margin="10dp"
-                android:text="1"
-                android:textColor="@color/black"/>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/discountClothes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:layout_margin="10dp"
-                app:layout_constraintTop_toBottomOf="@id/descriptionClothes"
-                app:layout_constraintLeft_toRightOf="@id/imageClothes"/>
-
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/lessProductBasket"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/discountClothes"
+                app:layout_constraintTop_toBottomOf="@id/imageClothes"
                 app:layout_constraintLeft_toRightOf="@id/imageClothes"
                 android:layout_margin="10dp"
                 android:src="@drawable/less"
@@ -70,7 +51,7 @@
                 android:id="@+id/sizeClothes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/discountClothes"
+                app:layout_constraintTop_toBottomOf="@id/imageClothes"
                 app:layout_constraintLeft_toRightOf="@id/lessProductBasket"
                 android:layout_margin="10dp"
                 android:text="hp"
@@ -80,7 +61,7 @@
                 android:id="@+id/moreProductBasket"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/discountClothes"
+                app:layout_constraintTop_toBottomOf="@id/imageClothes"
                 app:layout_constraintLeft_toRightOf="@id/sizeClothes"
                 android:layout_margin="10dp"
                 android:src="@drawable/more"
@@ -92,25 +73,26 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:layout_margin="10dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/curr"/>
+                app:layout_constraintTop_toBottomOf="@id/nameClothes"
+                app:layout_constraintLeft_toRightOf="@id/imageClothes"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/curr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin = "10dp"
-                android:textColor="@color/black"
+                android:layout_margin="10dp"
                 android:text="@string/ruble"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="parent"/>
+                android:textColor="@color/black"
+                app:layout_constraintStart_toEndOf="@+id/priceClothes"
+                app:layout_constraintTop_toBottomOf="@id/nameClothes" />
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/removeFavorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/addToCard"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:src="@drawable/favorite_border"
                 android:padding="10dp"
                 android:layout_margin="5dp"

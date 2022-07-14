@@ -1,6 +1,7 @@
 package com.semenovnikolay.clothingstore.domain.repository
 
 import androidx.lifecycle.LiveData
+import com.semenovnikolay.clothingstore.data.models.AddLocalModel
 import com.semenovnikolay.clothingstore.data.models.CardModel
 import com.semenovnikolay.clothingstore.data.models.FavoriteModel
 
@@ -22,4 +23,6 @@ interface FavoriteCall {
     suspend fun deleteProductToCardFromCardProduct(idProduct:String)
 
     suspend fun clear()
+
+    suspend fun updateClothesSize(favoriteModel: FavoriteModel)
 }

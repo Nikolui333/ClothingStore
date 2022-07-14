@@ -7,7 +7,7 @@ import com.semenovnikolay.clothingstore.data.models.CardModel
 import com.semenovnikolay.clothingstore.data.models.FavoriteModel
 
 @Database(entities=[CardModel::class, AddLocalModel::class, FavoriteModel::class], version=1)
-abstract class ClothesLocalDataBase : RoomDatabase() {
+abstract class ClothesDataBase : RoomDatabase() {
     abstract val cardDao: CardDao
     abstract val addClothesDAO:AddClothesDAO
     abstract val favoriteDAO:FavoriteDAO

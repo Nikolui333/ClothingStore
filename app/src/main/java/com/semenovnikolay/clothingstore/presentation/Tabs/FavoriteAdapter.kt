@@ -3,6 +3,7 @@ package com.semenovnikolay.clothingstore.presentation.Tabs
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.semenovnikolay.clothingstore.R
@@ -13,7 +14,10 @@ import com.semenovnikolay.clothingstore.databinding.FavoriteItemBinding
 import com.squareup.picasso.Picasso
 
 class FavoriteAdapter(private val deleteFromFavorite:(FavoriteModel)->Unit, private val addToCard: (/*AddLocalModel*/FavoriteModel) -> Unit,
-                      private val removeFromCard: (/*AddLocalModel*/FavoriteModel) -> Unit) :
+                      private val removeFromCard: (/*AddLocalModel*/FavoriteModel) -> Unit,
+                      private val loadClothesToCardFromCardProduct:(Int, AppCompatImageButton, AppCompatImageButton)->Unit,
+                      private val lessCount: (FavoriteModel) -> Unit,
+                      private val moreCount:(FavoriteModel)->Unit) :
     RecyclerView.Adapter<FavoriteAdapter.FavoriteHolder>() {
 
     private val productsFromFavorite = ArrayList<FavoriteModel>()
@@ -26,7 +30,7 @@ class FavoriteAdapter(private val deleteFromFavorite:(FavoriteModel)->Unit, priv
     }
 
     override fun onBindViewHolder(holder: FavoriteHolder, position: Int) {
-        holder.bind(productsFromFavorite[position], deleteFromFavorite, addToCard, removeFromCard)
+        holder.bind(productsFromFavorite[position], deleteFromFavorite, addToCard, removeFromCard, loadClothesToCardFromCardProduct, moreCount, lessCount)
     }
 
     override fun getItemCount(): Int {
@@ -43,7 +47,8 @@ class FavoriteAdapter(private val deleteFromFavorite:(FavoriteModel)->Unit, priv
 
         fun bind(
             favoriteModel: FavoriteModel, deleteFromFavorite: (FavoriteModel) -> Unit, addToCard: (/*AddLocalModel*/FavoriteModel) -> Unit,
-            removeFromCard: (/*AddLocalModel*/FavoriteModel) -> Unit
+            removeFromCard: (/*AddLocalModel*/FavoriteModel) -> Unit, loadClothesToCardFromCardProduct:(Int, AppCompatImageButton, AppCompatImageButton)->Unit,
+            moreCount: (FavoriteModel) -> Unit, lessCount: (FavoriteModel) -> Unit
         ) {
 
             val getImage = favoriteModel.image
@@ -67,9 +72,18 @@ class FavoriteAdapter(private val deleteFromFavorite:(FavoriteModel)->Unit, priv
             binding.removeFromCard.setOnClickListener(View.OnClickListener {
                 removeFromCard(/*addLocalModel*/favoriteModel)
             })
+
+            loadClothesToCardFromCardProduct(/*addLocalModel*/favoriteModel.id,  binding.addToCard, binding.removeFromCard)
+
+            binding.moreProductBasket.setOnClickListener(View.OnClickListener {
+                moreCount(favoriteModel) //увеличить колличество единиц товара
+
+            })
+
+            binding.lessProductBasket.setOnClickListener(View.OnClickListener {
+                lessCount(favoriteModel) // уменьшить колличество единиц товара
+
+            })
         }
     }
-
-
-
 }

@@ -5,8 +5,7 @@ import com.semenovnikolay.clothingstore.data.dataSource.AddClothesApiDataSource
 import com.semenovnikolay.clothingstore.data.dataSource.AddClothesDataSource
 import com.semenovnikolay.clothingstore.data.dataSourceIMPL.AddClothesApiDataSourceIMPL
 import com.semenovnikolay.clothingstore.data.dataSourceIMPL.AddClothesDataSourceIMPL
-import com.semenovnikolay.clothingstore.data.localDB.ClothesLocalDataBase
-import com.semenovnikolay.clothingstore.data.models.FavoriteModel
+import com.semenovnikolay.clothingstore.data.localDB.ClothesDataBase
 import com.semenovnikolay.clothingstore.data.repository.AddClothesRepository
 import com.semenovnikolay.clothingstore.data.repository.CardRepository
 import com.semenovnikolay.clothingstore.data.repository.FavoriteRepository
@@ -26,11 +25,11 @@ import org.koin.dsl.module
 val add = module{
 
     single {
-        Room.databaseBuilder(androidContext(), ClothesLocalDataBase::class.java,
+        Room.databaseBuilder(androidContext(), ClothesDataBase::class.java,
             "dbC").build()
     }
 
-    single { get<ClothesLocalDataBase>().addClothesDAO }
+    single { get<ClothesDataBase>().addClothesDAO }
 
 
     single<AddClothesDataSource> {
@@ -56,11 +55,11 @@ val add = module{
 val card = module{
 
     single {
-        Room.databaseBuilder(androidContext(), ClothesLocalDataBase::class.java,
+        Room.databaseBuilder(androidContext(), ClothesDataBase::class.java,
             "dbO").build()
     }
 
-    single { get<ClothesLocalDataBase>().cardDao }
+    single { get<ClothesDataBase>().cardDao }
 
     single<CardCall> { CardRepository(get()) }
 
@@ -73,11 +72,11 @@ val card = module{
 val favorite = module{
 
     single {
-        Room.databaseBuilder(androidContext(), ClothesLocalDataBase::class.java,
+        Room.databaseBuilder(androidContext(), ClothesDataBase::class.java,
             "dbO").build()
     }
 
-    single { get<ClothesLocalDataBase>().favoriteDAO }
+    single { get<ClothesDataBase>().favoriteDAO }
 
     single<FavoriteCall> { FavoriteRepository(get()) }
 

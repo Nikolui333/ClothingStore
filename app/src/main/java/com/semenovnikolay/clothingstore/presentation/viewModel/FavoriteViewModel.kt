@@ -3,6 +3,7 @@ package com.semenovnikolay.clothingstore.presentation.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.semenovnikolay.clothingstore.data.models.AddLocalModel
 import com.semenovnikolay.clothingstore.data.models.CardModel
 import com.semenovnikolay.clothingstore.data.models.FavoriteModel
 import com.semenovnikolay.clothingstore.domain.useCase.CardUseCase
@@ -50,5 +51,11 @@ class FavoriteViewModel (private val favoriteUseCase: FavoriteUseCase): ViewMode
     fun clearCard() = viewModelScope.launch{
 
         favoriteUseCase.clear()
+    }
+
+    // launch позволяет запускать методы в параллельных потоках
+    // метод updateClothesSize меняет размер одежды
+    fun updateClothesSize(favoriteModel: FavoriteModel) = viewModelScope.launch{
+        favoriteUseCase.updateClothesSize(favoriteModel)
     }
 }

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.semenovnikolay.clothingstore.R
@@ -48,14 +49,31 @@ class Favorite : Fragment() {
                     favoriteModel
                 )
             },
-                { addLocalModel: /*AddLocalModel*/FavoriteModel ->
-                    addToCard(addLocalModel)
+                { favoriteModel: /*AddLocalModel*/FavoriteModel ->
+                    addToCard(favoriteModel)
                 },
-                { addLocalModel: /*AddLocalModel*/FavoriteModel ->
+                { favoriteModel: /*AddLocalModel*/FavoriteModel ->
                     removeFromCard(
-                        addLocalModel
+                        favoriteModel
                     )
-                })
+                },
+                { idProduct:Int, addToBasket: AppCompatImageButton,
+                  removeFromBasket: AppCompatImageButton ->
+                    loadClothesToCardFromCardProduct(
+                        idProduct, addToBasket, removeFromBasket
+                    )
+                },
+                { favoriteModel: FavoriteModel ->
+                    lessSize(
+                        favoriteModel
+                    )
+                },
+                { favoriteModel: FavoriteModel ->
+                    moreSize(
+                        favoriteModel
+                    )
+                }
+            )
         binding?.catalogClothes?.adapter = favoriteAdapter
     }
 
@@ -73,22 +91,78 @@ class Favorite : Fragment() {
     }
 
     // добавление товара в корзину
-    private fun addToCard(addLocalModel: /*AddLocalModel*/FavoriteModel/*, addToBasket: AppCompatImageButton,
+    private fun addToCard(favoriteModel: /*AddLocalModel*/FavoriteModel/*, addToBasket: AppCompatImageButton,
                           removeFromBasket: AppCompatImageButton*/
     ) {
-        cardViewModel.startInsert(addLocalModel.name,
-            addLocalModel.image,
-            addLocalModel.price,
-            addLocalModel.id.toString(),
+        cardViewModel.startInsert(favoriteModel.name,
+            favoriteModel.image,
+            favoriteModel.price,
+            favoriteModel.id.toString(),
             /*"1",*/
-            addLocalModel.size
+            favoriteModel.size
         )
 /*        addToBasket.visibility = View.GONE
         removeFromBasket.visibility = View.VISIBLE*/
     }
 
     // удаление товара из корзины
-    private fun removeFromCard(addLocalModel: /*AddLocalModel*/FavoriteModel) {
-        cardViewModel.deleteProductToCardFromCardProduct(addLocalModel.id.toString())
+    private fun removeFromCard(favoriteModel: /*AddLocalModel*/FavoriteModel) {
+        cardViewModel.deleteProductToCardFromCardProduct(favoriteModel.id.toString())
+    }
+
+    private fun loadClothesToCardFromCardProduct (idProduct:Int, addToBasket: AppCompatImageButton,
+                                                  removeFromBasket: AppCompatImageButton){
+
+        // передаём id, который приходит из адаптера
+        cardViewModel.loadMedicineToCardFromCardProduct(idProduct.toString()).observe(viewLifecycleOwner, Observer {
+
+            // в переменную count получаем колличество товара
+            val count = it.count() // it - это неявное имя одного параметра в лямбда-функции
+
+            // если колличество больше нуля, убрать кнопку добавления и отобразить кнопку удаления
+            if (count>0) {
+                addToBasket.visibility = View.GONE
+                removeFromBasket.visibility = View.VISIBLE
+            }
+            else {
+                addToBasket.visibility = View.VISIBLE
+                removeFromBasket.visibility = View.GONE }
+        })
+
+    }
+
+    // уменьшение колличества единиц товара
+    private fun lessSize(favoriteModel:FavoriteModel) {
+
+        var size: Int = favoriteModel.size.toInt()
+        size--
+        if (size<1) { // если size<40 вывести 40
+            favoriteViewModel.updateClothesSize(
+                FavoriteModel(favoriteModel.id, favoriteModel.name,
+                    favoriteModel.image, /*favoriteModel.description, favoriteModel.discount,*/ favoriteModel.price, favoriteModel.idFavoriteProduct, "1")
+            )
+
+        }
+        else {
+
+            favoriteViewModel.updateClothesSize(
+                FavoriteModel(favoriteModel.id, favoriteModel.name,
+                    favoriteModel.image, /*favoriteModel.description, favoriteModel.discount,*/ favoriteModel.price, favoriteModel.idFavoriteProduct, size.toString())
+            )
+
+        }
+    }
+
+    // увеличение колличества единиц товара
+    private fun moreSize(favoriteModel:FavoriteModel) {
+
+        // получаем колличество товара
+        var size: Int = favoriteModel.size.toInt()
+        size++
+
+        favoriteViewModel.updateClothesSize(
+            FavoriteModel(favoriteModel.id, favoriteModel.name,
+                favoriteModel.image, /*addLocalModel.description, addLocalModel.discount,*/ favoriteModel.price, favoriteModel.idFavoriteProduct, size.toString()
+            ))
     }
 }

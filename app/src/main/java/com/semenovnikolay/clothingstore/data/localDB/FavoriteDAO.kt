@@ -1,10 +1,8 @@
 package com.semenovnikolay.clothingstore.data.localDB
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
+import com.semenovnikolay.clothingstore.data.models.AddLocalModel
 import com.semenovnikolay.clothingstore.data.models.FavoriteModel
 
 @Dao
@@ -33,4 +31,7 @@ interface FavoriteDAO {
 
     @Query("DELETE FROM favorite_data_table")
     suspend fun clear()
+
+    @Update
+    suspend fun updateClothesSize(favoriteModel: FavoriteModel)
 }

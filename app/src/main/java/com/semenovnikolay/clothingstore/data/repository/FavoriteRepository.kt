@@ -2,6 +2,7 @@ package com.semenovnikolay.clothingstore.data.repository
 
 import androidx.lifecycle.LiveData
 import com.semenovnikolay.clothingstore.data.localDB.FavoriteDAO
+import com.semenovnikolay.clothingstore.data.models.AddLocalModel
 import com.semenovnikolay.clothingstore.data.models.FavoriteModel
 import com.semenovnikolay.clothingstore.domain.repository.FavoriteCall
 import kotlinx.coroutines.CoroutineScope
@@ -38,4 +39,8 @@ class FavoriteRepository (private val dao: FavoriteDAO): FavoriteCall {
 
     override suspend fun clear() {
         dao.clear()    }
+
+    override suspend fun updateClothesSize(favoriteModel: FavoriteModel) {
+        dao.updateClothesSize(favoriteModel)
+    }
 }

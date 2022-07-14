@@ -1,6 +1,7 @@
 package com.semenovnikolay.clothingstore.domain.useCase
 
 import androidx.lifecycle.LiveData
+import com.semenovnikolay.clothingstore.data.models.AddLocalModel
 import com.semenovnikolay.clothingstore.data.models.CardModel
 import com.semenovnikolay.clothingstore.data.models.FavoriteModel
 import com.semenovnikolay.clothingstore.domain.repository.CardCall
@@ -38,4 +39,10 @@ class FavoriteUseCase (private val favoriteCall: FavoriteCall) {
         // очистка корзины
         suspend fun clear() {
             favoriteCall.clear()    }
+
+    // изменение размера одежды
+    suspend fun updateClothesSize(favoriteModel: FavoriteModel) {
+        CoroutineScope(Dispatchers.IO).launch {
+            favoriteCall.updateClothesSize(favoriteModel)}
+    }
 }
