@@ -37,6 +37,8 @@ class AddClothes : Fragment() {
         setUpAdapter()
         loadClothes()
 
+/*        setUpFavoriteAdapter()
+        loadClothesToFavorite()*/
 
         return binding?.root
     /*inflater.inflate(R.layout.fragment_add_clothes, container, false)*/
@@ -45,12 +47,13 @@ class AddClothes : Fragment() {
   //  @SuppressLint("UseRequireInsteadOfGet")
     private fun setUpAdapter() {
         binding?.catalogClothes?.layoutManager = LinearLayoutManager(context)
-        addAdapter = AddAdapter({ addLocalModel: AddLocalModel/*, addToBasket: AppCompatImageButton,
-                                  removeFromBasket: AppCompatImageButton*/ ->
-            addToCard(
-                addLocalModel/*, addToBasket, removeFromBasket*/
-            )
-        }, { addLocalModel: AddLocalModel ->
+        addAdapter = AddAdapter({ addLocalModel: AddLocalModel ->
+            addToCard(addLocalModel)
+        },
+            {addLocalModel: AddLocalModel ->
+                addToFavorite(addLocalModel)
+            },
+            { addLocalModel: AddLocalModel ->
             removeFromCard(
                 addLocalModel
             )
@@ -127,7 +130,7 @@ class AddClothes : Fragment() {
     private fun addToFavorite(addLocalModel: AddLocalModel/*, addToBasket: AppCompatImageButton,
                           removeFromBasket: AppCompatImageButton*/
     ) {
-        cardViewModel.startInsert(addLocalModel.name,
+        favoriteViewModel.startInsert(addLocalModel.name,
             addLocalModel.image,
             addLocalModel.price,
             addLocalModel.id.toString(),

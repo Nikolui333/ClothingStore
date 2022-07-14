@@ -13,7 +13,9 @@ import com.semenovnikolay.clothingstore.databinding.AddClothingItemBinding
 import com.semenovnikolay.clothingstore.presentation.di.add
 import com.squareup.picasso.Picasso
 
-class AddAdapter(private val addToCard: (AddLocalModel/*, AppCompatImageButton, AppCompatImageButton*/) -> Unit, private val removeFromCard:(AddLocalModel)->Unit,
+class AddAdapter(private val addToCard: (AddLocalModel/*, AppCompatImageButton, AppCompatImageButton*/) -> Unit,
+                 private val addToFavorite: (AddLocalModel/*, AppCompatImageButton, AppCompatImageButton*/) -> Unit,
+                 private val removeFromCard:(AddLocalModel)->Unit,
                  private val loadClothesToCardFromCardProduct:(Int, AppCompatImageButton, AppCompatImageButton)->Unit,
                  private val lessCount: (AddLocalModel) -> Unit,
                  private val moreCount:(AddLocalModel)->Unit)
@@ -30,7 +32,7 @@ class AddAdapter(private val addToCard: (AddLocalModel/*, AppCompatImageButton, 
     }
 
     override fun onBindViewHolder(holder: AddHolder, position: Int) {
-        holder.bind(add[position], addToCard, removeFromCard, loadClothesToCardFromCardProduct, moreCount, lessCount)
+        holder.bind(add[position], addToCard, addToFavorite, removeFromCard, loadClothesToCardFromCardProduct, moreCount, lessCount)
     }
 
     override fun getItemCount(): Int {
@@ -42,6 +44,7 @@ class AddAdapter(private val addToCard: (AddLocalModel/*, AppCompatImageButton, 
         private val binding : AddClothingItemBinding = bind
 
         fun bind(addLocalModel: AddLocalModel, addToCard: (AddLocalModel) -> Unit,
+                 addToFavorite: (AddLocalModel) -> Unit,
                  removeFromCard: (AddLocalModel) -> Unit,
                  loadClothesToCardFromCardProduct: (Int, AppCompatImageButton, AppCompatImageButton) -> Unit,
                  moreCount: (AddLocalModel) -> Unit, lessCount: (AddLocalModel) -> Unit){
@@ -56,9 +59,11 @@ class AddAdapter(private val addToCard: (AddLocalModel/*, AppCompatImageButton, 
             binding.sizeClothes.text = addLocalModel.size
 
             binding.addToCard.setOnClickListener(View.OnClickListener {
-
                 addToCard.invoke(addLocalModel)
+            })
 
+            binding.addToFavorite.setOnClickListener(View.OnClickListener {
+                addToFavorite.invoke(addLocalModel)
             })
 
             binding.removeFromCard.setOnClickListener(View.OnClickListener {
