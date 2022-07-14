@@ -58,6 +58,9 @@ class AddClothes : Fragment() {
                 addLocalModel
             )
         },
+            {addLocalModel: AddLocalModel ->
+                removeFromFavorite(addLocalModel)
+            },
             { idProduct:Int, idFavoriteProduct:Int, addToBasket: AppCompatImageButton,
               removeFromBasket: AppCompatImageButton,  addToFavoriteTab:AppCompatImageButton, removeFromFavorite:AppCompatImageButton ->
                 loadClothesToCardFromCardProduct(
@@ -144,6 +147,11 @@ class AddClothes : Fragment() {
     // удаление товара из корзины
     private fun removeFromCard(addLocalModel: AddLocalModel) {
         cardViewModel.deleteProductToCardFromCardProduct(addLocalModel.id.toString())
+    }
+
+    // удаление товара из корзины
+    private fun removeFromFavorite(addLocalModel: AddLocalModel) {
+        favoriteViewModel.deleteProductToCardFromCardProduct(addLocalModel.id.toString())
     }
 
     private fun loadClothesToCardFromCardProduct (idProduct:Int, idFavoriteProduct:Int, addToBasket: AppCompatImageButton,

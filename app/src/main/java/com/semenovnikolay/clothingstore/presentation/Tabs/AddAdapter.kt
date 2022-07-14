@@ -16,6 +16,7 @@ import com.squareup.picasso.Picasso
 class AddAdapter(private val addToCard: (AddLocalModel/*, AppCompatImageButton, AppCompatImageButton*/) -> Unit,
                  private val addToFavorite: (AddLocalModel/*, AppCompatImageButton, AppCompatImageButton*/) -> Unit,
                  private val removeFromCard:(AddLocalModel)->Unit,
+                 private val removeFromFavorite:(AddLocalModel)->Unit,
                  private val loadClothesToCardFromCardProduct:(Int, Int, AppCompatImageButton, AppCompatImageButton, AppCompatImageButton, AppCompatImageButton)->Unit,
                  private val lessCount: (AddLocalModel) -> Unit,
                  private val moreCount:(AddLocalModel)->Unit)
@@ -32,7 +33,7 @@ class AddAdapter(private val addToCard: (AddLocalModel/*, AppCompatImageButton, 
     }
 
     override fun onBindViewHolder(holder: AddHolder, position: Int) {
-        holder.bind(add[position], addToCard, addToFavorite, removeFromCard, loadClothesToCardFromCardProduct, moreCount, lessCount)
+        holder.bind(add[position], addToCard, addToFavorite, removeFromCard, removeFromFavorite, loadClothesToCardFromCardProduct, moreCount, lessCount)
     }
 
     override fun getItemCount(): Int {
@@ -46,6 +47,7 @@ class AddAdapter(private val addToCard: (AddLocalModel/*, AppCompatImageButton, 
         fun bind(addLocalModel: AddLocalModel, addToCard: (AddLocalModel) -> Unit,
                  addToFavorite: (AddLocalModel) -> Unit,
                  removeFromCard: (AddLocalModel) -> Unit,
+                 removeFromFavorite: (AddLocalModel) -> Unit,
                  loadClothesToCardFromCardProduct: (Int, Int, AppCompatImageButton, AppCompatImageButton, AppCompatImageButton, AppCompatImageButton) -> Unit,
                  moreCount: (AddLocalModel) -> Unit, lessCount: (AddLocalModel) -> Unit){
             // получаем ссылку на изображение
@@ -70,6 +72,10 @@ class AddAdapter(private val addToCard: (AddLocalModel/*, AppCompatImageButton, 
 
                 removeFromCard(addLocalModel)
 
+            })
+
+            binding.removeFavorite.setOnClickListener(View.OnClickListener{
+                removeFromFavorite(addLocalModel)
             })
                                                                 // ???
             loadClothesToCardFromCardProduct(addLocalModel.id, addLocalModel.id, binding.addToCard, binding.removeFromCard, binding.addToFavorite, binding.removeFavorite)
