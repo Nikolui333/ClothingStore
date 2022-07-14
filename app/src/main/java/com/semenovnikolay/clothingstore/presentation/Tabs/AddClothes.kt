@@ -58,10 +58,10 @@ class AddClothes : Fragment() {
                 addLocalModel
             )
         },
-            { idProduct:Int, addToBasket: AppCompatImageButton,
-              removeFromBasket: AppCompatImageButton ->
+            { idProduct:Int, idFavoriteProduct:Int, addToBasket: AppCompatImageButton,
+              removeFromBasket: AppCompatImageButton,  addToFavoriteTab:AppCompatImageButton, removeFromFavorite:AppCompatImageButton ->
                 loadClothesToCardFromCardProduct(
-                    idProduct, addToBasket, removeFromBasket
+                    idProduct, idFavoriteProduct, addToBasket, removeFromBasket, addToFavoriteTab, removeFromFavorite
                 )
             },
             { addLocalModel: AddLocalModel ->
@@ -146,9 +146,26 @@ class AddClothes : Fragment() {
         cardViewModel.deleteProductToCardFromCardProduct(addLocalModel.id.toString())
     }
 
-    private fun loadClothesToCardFromCardProduct (idProduct:Int, addToBasket: AppCompatImageButton,
-                                                   removeFromBasket: AppCompatImageButton
+    private fun loadClothesToCardFromCardProduct (idProduct:Int, idFavoriteProduct:Int, addToBasket: AppCompatImageButton,
+                                                   removeFromBasket: AppCompatImageButton, addToFavorite: AppCompatImageButton,
+                                                  removeFromFavorite: AppCompatImageButton
     ){
+        // передаём id, который приходит из адаптера
+        favoriteViewModel.loadMedicineToCardFromCardProduct(idFavoriteProduct.toString()).observe(viewLifecycleOwner, Observer {
+
+            // в переменную count получаем колличество товара
+            val count = it.count() // it - это неявное имя одного параметра в лямбда-функции
+
+            // если колличество больше нуля, убрать кнопку добавления и отобразить кнопку удаления
+            if (count>0) {
+                addToFavorite.visibility = View.GONE
+                removeFromFavorite.visibility = View.VISIBLE
+            }
+            else {
+                addToFavorite.visibility = View.VISIBLE
+                removeFromFavorite.visibility = View.GONE }
+        })
+
         // передаём id, который приходит из адаптера
         cardViewModel.loadMedicineToCardFromCardProduct(idProduct.toString()).observe(viewLifecycleOwner, Observer {
 

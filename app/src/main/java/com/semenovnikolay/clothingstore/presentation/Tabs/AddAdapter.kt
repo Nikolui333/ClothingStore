@@ -16,7 +16,7 @@ import com.squareup.picasso.Picasso
 class AddAdapter(private val addToCard: (AddLocalModel/*, AppCompatImageButton, AppCompatImageButton*/) -> Unit,
                  private val addToFavorite: (AddLocalModel/*, AppCompatImageButton, AppCompatImageButton*/) -> Unit,
                  private val removeFromCard:(AddLocalModel)->Unit,
-                 private val loadClothesToCardFromCardProduct:(Int, AppCompatImageButton, AppCompatImageButton)->Unit,
+                 private val loadClothesToCardFromCardProduct:(Int, Int, AppCompatImageButton, AppCompatImageButton, AppCompatImageButton, AppCompatImageButton)->Unit,
                  private val lessCount: (AddLocalModel) -> Unit,
                  private val moreCount:(AddLocalModel)->Unit)
     : RecyclerView.Adapter<AddAdapter.AddHolder>() {
@@ -46,7 +46,7 @@ class AddAdapter(private val addToCard: (AddLocalModel/*, AppCompatImageButton, 
         fun bind(addLocalModel: AddLocalModel, addToCard: (AddLocalModel) -> Unit,
                  addToFavorite: (AddLocalModel) -> Unit,
                  removeFromCard: (AddLocalModel) -> Unit,
-                 loadClothesToCardFromCardProduct: (Int, AppCompatImageButton, AppCompatImageButton) -> Unit,
+                 loadClothesToCardFromCardProduct: (Int, Int, AppCompatImageButton, AppCompatImageButton, AppCompatImageButton, AppCompatImageButton) -> Unit,
                  moreCount: (AddLocalModel) -> Unit, lessCount: (AddLocalModel) -> Unit){
             // получаем ссылку на изображение
             val getImage = addLocalModel.image
@@ -71,8 +71,8 @@ class AddAdapter(private val addToCard: (AddLocalModel/*, AppCompatImageButton, 
                 removeFromCard(addLocalModel)
 
             })
-
-            loadClothesToCardFromCardProduct(addLocalModel.id, binding.addToCard, binding.removeFromCard)
+                                                                // ???
+            loadClothesToCardFromCardProduct(addLocalModel.id, addLocalModel.id, binding.addToCard, binding.removeFromCard, binding.addToFavorite, binding.removeFavorite)
 
             binding.moreProductBasket.setOnClickListener(View.OnClickListener {
                 moreCount(addLocalModel) //увеличить колличество единиц товара
