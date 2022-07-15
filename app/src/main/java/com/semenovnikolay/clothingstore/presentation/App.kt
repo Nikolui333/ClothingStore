@@ -4,6 +4,7 @@ import android.app.Application
 import com.semenovnikolay.clothingstore.presentation.di.add
 import com.semenovnikolay.clothingstore.presentation.di.card
 import com.semenovnikolay.clothingstore.presentation.di.favorite
+import com.semenovnikolay.clothingstore.presentation.di.orderApi
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -21,7 +22,7 @@ class App: Application() {
             //inject Android context
             androidContext(this@App)
 
-            modules(add, card, favorite)
+            modules(add, card, favorite, orderApi)
 
         }
 

@@ -30,19 +30,14 @@ class ShoppingCart : Fragment()/*,View.OnClickListener*/ {
         initRecyclerCard()
         loadClothesFromCard()
 
+        // очистка корзины
         binding?.clearCard?.setOnClickListener {
-         /*   when(view?.id) {
-                // очистка корзины
-                R.id.clearCard ->*/ cardViewModel.clearCard()
-
-                // отправка заказа
-/*            R.id.checkoutCard -> {
-                // запуск фрагмента (выезжающей панели) для ввода данных пользователя
-                val checkout = Checkout()
-                checkout.show((context as FragmentActivity).supportFragmentManager, "checkout")
-
-            }*/
-          //  }
+            cardViewModel.clearCard()
+        }
+            // отправка заказа
+        binding?.checkoutCard?.setOnClickListener {
+            val checkout = Checkout()
+            checkout.show((context as FragmentActivity).supportFragmentManager, "checkout")
         }
 
         return binding?.root

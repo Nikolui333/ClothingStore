@@ -9,15 +9,19 @@ import com.semenovnikolay.clothingstore.data.localDB.ClothesDataBase
 import com.semenovnikolay.clothingstore.data.repository.AddClothesRepository
 import com.semenovnikolay.clothingstore.data.repository.CardRepository
 import com.semenovnikolay.clothingstore.data.repository.FavoriteRepository
+import com.semenovnikolay.clothingstore.data.repository.OrderApiRepository
 import com.semenovnikolay.clothingstore.domain.repository.AddClothesCall
 import com.semenovnikolay.clothingstore.domain.repository.CardCall
 import com.semenovnikolay.clothingstore.domain.repository.FavoriteCall
+import com.semenovnikolay.clothingstore.domain.repository.OrderApiCall
 import com.semenovnikolay.clothingstore.domain.useCase.AddClothesUseCase
 import com.semenovnikolay.clothingstore.domain.useCase.CardUseCase
 import com.semenovnikolay.clothingstore.domain.useCase.FavoriteUseCase
+import com.semenovnikolay.clothingstore.domain.useCase.OrderApiUseCase
 import com.semenovnikolay.clothingstore.presentation.viewModel.AddClothesViewModel
 import com.semenovnikolay.clothingstore.presentation.viewModel.CardViewModel
 import com.semenovnikolay.clothingstore.presentation.viewModel.FavoriteViewModel
+import com.semenovnikolay.clothingstore.presentation.viewModel.OrderApiViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -83,5 +87,15 @@ val favorite = module{
     single { FavoriteUseCase(get()) }
 
     viewModel { FavoriteViewModel(get()) }
+
+}
+
+val orderApi= module{
+
+    single<OrderApiCall> { OrderApiRepository() }
+
+    single { OrderApiUseCase(get()) }
+
+    viewModel { OrderApiViewModel(get()) }
 
 }

@@ -13,5 +13,9 @@
     <string name="totalOrder">TOTAL:</string>
     <string name="size">size:</string>
 
+    <string name="yourName">Ваше имя</string>
+    <string name="yourPhone">Ваш телефон</string>
+    <string name="submit">ОТПРАВИТЬ</string>
+
 
 </resources>

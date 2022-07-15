@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.Tabs.Checkout">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutEnterNameCheckout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="10dp"
+                app:boxBackgroundColor="@android:color/black"
+                app:startIconTint="@android:color/white"
+                app:endIconTint="@android:color/holo_red_light"
+                app:boxStrokeColor="@android:color/black"
+                android:hint="@string/yourName"
+                app:hintTextColor="@android:color/black"
+                app:endIconMode="clear_text"
+                app:boxStrokeWidthFocused="4dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/enterNameCheckout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@android:color/black"
+                    app:backgroundTint="@color/orange"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutEnterPhoneCheckout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/layoutEnterNameCheckout"
+                android:layout_margin="10dp"
+                app:boxBackgroundColor="@android:color/black"
+                app:startIconTint="@android:color/white"
+                app:endIconTint="@android:color/holo_red_light"
+                app:boxStrokeColor="@android:color/black"
+                android:hint="@string/yourPhone"
+                app:hintTextColor="@android:color/black"
+                app:endIconMode="clear_text"
+                app:boxStrokeWidthFocused="4dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/enterPhoneCheckout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:textColor="@android:color/black"
+                    app:backgroundTint="@color/orange"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/submitCheckout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/layoutEnterPhoneCheckout"
+                android:layout_marginTop="20dp"
+                android:text="@string/submit"
+                android:background="@color/orange"
+                android:textColor="@color/black"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/res"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/submitCheckout"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textColor="@color/orange"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+
+</layout>
