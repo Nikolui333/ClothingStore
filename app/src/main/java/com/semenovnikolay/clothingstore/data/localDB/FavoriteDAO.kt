@@ -18,9 +18,6 @@ interface FavoriteDAO {
     @Query("SELECT * FROM favorite_data_table WHERE favorite_idProduct = :idProduct")
     fun loadMedicineToCardFromCardProduct(idProduct:String): LiveData<List<FavoriteModel>>
 
-/*    @Update
-    suspend fun updateProductToCard(cardModel: CardModel)*/
-
     // удаление конкретного товара на экране корзины
     @Query("DELETE FROM favorite_data_table WHERE favorite_id = :idProductToCard")
     suspend fun deleteProductFromCard(idProductToCard:Int)

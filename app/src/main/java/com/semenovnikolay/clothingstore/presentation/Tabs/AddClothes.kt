@@ -32,16 +32,10 @@ class AddClothes : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_clothes, container, false)
 
-      //  initRecyclerAddClothes()
-
         setUpAdapter()
         loadClothes()
 
-/*        setUpFavoriteAdapter()
-        loadClothesToFavorite()*/
-
         return binding?.root
-    /*inflater.inflate(R.layout.fragment_add_clothes, container, false)*/
     }
 
   //  @SuppressLint("UseRequireInsteadOfGet")
@@ -115,33 +109,25 @@ class AddClothes : Fragment() {
     }
 
     // добавление товара в корзину
-    private fun addToCard(addLocalModel: AddLocalModel/*, addToBasket: AppCompatImageButton,
-                          removeFromBasket: AppCompatImageButton*/
+    private fun addToCard(addLocalModel: AddLocalModel
     ) {
         cardViewModel.startInsert(addLocalModel.name,
             addLocalModel.image,
             addLocalModel.price,
             addLocalModel.id.toString(),
-            /*"1",*/
             addLocalModel.size
         )
-/*        addToBasket.visibility = View.GONE
-        removeFromBasket.visibility = View.VISIBLE*/
     }
 
     // добавление товара в корзину
-    private fun addToFavorite(addLocalModel: AddLocalModel/*, addToBasket: AppCompatImageButton,
-                          removeFromBasket: AppCompatImageButton*/
+    private fun addToFavorite(addLocalModel: AddLocalModel
     ) {
         favoriteViewModel.startInsert(addLocalModel.name,
             addLocalModel.image,
             addLocalModel.price,
             addLocalModel.id.toString(),
-            /*"1",*/
             addLocalModel.size
         )
-/*        addToBasket.visibility = View.GONE
-        removeFromBasket.visibility = View.VISIBLE*/
     }
 
     // удаление товара из корзины
@@ -191,10 +177,6 @@ class AddClothes : Fragment() {
         })
 
     }
-
-/*    fun onClickAddToCard(){
-        addToCard(addLocalModel)
-    }*/
 
     // увеличение колличества единиц товара
     private fun moreSize(addLocalModel:AddLocalModel) {

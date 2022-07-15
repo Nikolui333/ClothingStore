@@ -14,11 +14,6 @@ class FavoriteRepository (private val dao: FavoriteDAO): FavoriteCall {
     override suspend fun insert(favoriteModel: FavoriteModel) {
         dao.insert(favoriteModel)    }
 
-/*    // обновление информации о товаре, после изменения его количества
-    override suspend fun updateProductToCard(cardModel: CardModel){
-        dao.updateProductToCard(cardModel)
-    }*/
-
     override fun loadClothesFromCard(): LiveData<List<FavoriteModel>> {
         return dao.loadMedicineFromCard()    }
 

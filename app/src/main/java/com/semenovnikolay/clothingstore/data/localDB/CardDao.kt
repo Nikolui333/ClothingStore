@@ -17,9 +17,6 @@ interface CardDao {
     @Query("SELECT * FROM card_data_table WHERE card_idProduct = :idProduct")
     fun loadMedicineToCardFromCardProduct(idProduct:String): LiveData<List<CardModel>>
 
-/*    @Update
-    suspend fun updateProductToCard(cardModel: CardModel)*/
-
     // удаление конкретного товара на экране корзины
     @Query("DELETE FROM card_data_table WHERE card_id = :idProductToCard")
     suspend fun deleteProductFromCard(idProductToCard:Int)

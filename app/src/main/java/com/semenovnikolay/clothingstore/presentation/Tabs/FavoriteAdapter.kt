@@ -13,8 +13,8 @@ import com.semenovnikolay.clothingstore.data.models.FavoriteModel
 import com.semenovnikolay.clothingstore.databinding.FavoriteItemBinding
 import com.squareup.picasso.Picasso
 
-class FavoriteAdapter(private val deleteFromFavorite:(FavoriteModel)->Unit, private val addToCard: (/*AddLocalModel*/FavoriteModel) -> Unit,
-                      private val removeFromCard: (/*AddLocalModel*/FavoriteModel) -> Unit,
+class FavoriteAdapter(private val deleteFromFavorite:(FavoriteModel)->Unit, private val addToCard: (FavoriteModel) -> Unit,
+                      private val removeFromCard: (FavoriteModel) -> Unit,
                       private val loadClothesToCardFromCardProduct:(Int, AppCompatImageButton, AppCompatImageButton)->Unit,
                       private val lessCount: (FavoriteModel) -> Unit,
                       private val moreCount:(FavoriteModel)->Unit) :

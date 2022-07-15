@@ -7,9 +7,6 @@ interface CardCall {
     // suspend приостанавливает поток после выплнения метода
     suspend fun insert(cardModel: CardModel)
 
-/*    // обновление информации о товаре, после изменения его количества
-    suspend fun updateProductToCard(cardModel: CardModel)*/
-
     fun loadClothesFromCard(): LiveData<List<CardModel>>
 
     fun loadMedicineToCardFromCardProduct(idProduct:String): LiveData<List<CardModel>>

@@ -5,7 +5,7 @@ import com.semenovnikolay.clothingstore.data.dataSource.AddClothesApiDataSource
 import com.semenovnikolay.clothingstore.data.dataSource.AddClothesDataSource
 import com.semenovnikolay.clothingstore.data.dataSourceIMPL.AddClothesApiDataSourceIMPL
 import com.semenovnikolay.clothingstore.data.dataSourceIMPL.AddClothesDataSourceIMPL
-import com.semenovnikolay.clothingstore.data.localDB.ClothesDataBase
+import com.semenovnikolay.clothingstore.data.localDB.ClothesLDB
 import com.semenovnikolay.clothingstore.data.repository.AddClothesRepository
 import com.semenovnikolay.clothingstore.data.repository.CardRepository
 import com.semenovnikolay.clothingstore.data.repository.FavoriteRepository
@@ -29,11 +29,11 @@ import org.koin.dsl.module
 val add = module{
 
     single {
-        Room.databaseBuilder(androidContext(), ClothesDataBase::class.java,
+        Room.databaseBuilder(androidContext(), ClothesLDB::class.java,
             "dbC").build()
     }
 
-    single { get<ClothesDataBase>().addClothesDAO }
+    single { get<ClothesLDB>().addClothesDAO }
 
 
     single<AddClothesDataSource> {
@@ -59,11 +59,11 @@ val add = module{
 val card = module{
 
     single {
-        Room.databaseBuilder(androidContext(), ClothesDataBase::class.java,
+        Room.databaseBuilder(androidContext(), ClothesLDB::class.java,
             "dbO").build()
     }
 
-    single { get<ClothesDataBase>().cardDao }
+    single { get<ClothesLDB>().cardDao }
 
     single<CardCall> { CardRepository(get()) }
 
@@ -76,11 +76,11 @@ val card = module{
 val favorite = module{
 
     single {
-        Room.databaseBuilder(androidContext(), ClothesDataBase::class.java,
+        Room.databaseBuilder(androidContext(), ClothesLDB::class.java,
             "dbO").build()
     }
 
-    single { get<ClothesDataBase>().favoriteDAO }
+    single { get<ClothesLDB>().favoriteDAO }
 
     single<FavoriteCall> { FavoriteRepository(get()) }
 

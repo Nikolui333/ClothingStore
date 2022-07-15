@@ -13,8 +13,8 @@ import com.semenovnikolay.clothingstore.databinding.AddClothingItemBinding
 import com.semenovnikolay.clothingstore.presentation.di.add
 import com.squareup.picasso.Picasso
 
-class AddAdapter(private val addToCard: (AddLocalModel/*, AppCompatImageButton, AppCompatImageButton*/) -> Unit,
-                 private val addToFavorite: (AddLocalModel/*, AppCompatImageButton, AppCompatImageButton*/) -> Unit,
+class AddAdapter(private val addToCard: (AddLocalModel) -> Unit,
+                 private val addToFavorite: (AddLocalModel) -> Unit,
                  private val removeFromCard:(AddLocalModel)->Unit,
                  private val removeFromFavorite:(AddLocalModel)->Unit,
                  private val loadClothesToCardFromCardProduct:(Int, Int, AppCompatImageButton, AppCompatImageButton, AppCompatImageButton, AppCompatImageButton)->Unit,

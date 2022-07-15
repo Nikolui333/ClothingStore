@@ -40,11 +40,6 @@ class Checkout : BottomSheetDialogFragment() {
                 // joinToString нужно чтобы выводить массив без квадратных скобок
                 val descriptionOrder = it.map { it.name + /*": количество - " + it.count +*/ ", цена - " + it.price/*totalPrice*/ + " р; " }.joinToString("")
 
-/*                // запись данных в локальную базу данных
-                orderLocalViewModel.startInsert(binding?.enterNameCheckout?.text.toString(),
-                    binding?.enterPhoneCheckout?.text.toString(), descriptionOrder,
-                    totalOrder.toString() )*/
-
                 // отправка данных на сервер
                 orderApiViewModel.insert((context as FragmentActivity), binding?.enterNameCheckout?.text.toString(),
                     binding?.enterPhoneCheckout?.text.toString(), descriptionOrder,

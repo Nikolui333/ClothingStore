@@ -15,11 +15,7 @@ class FavoriteUseCase (private val favoriteCall: FavoriteCall) {
         // добавление уникального товара в корзину
         suspend fun insert(favoriteModel: FavoriteModel) {
             favoriteCall.insert(favoriteModel)    }
-        /*    // увеличение (или уменьшение) количества пачек одного из препоратов
-            suspend fun updateProductToCard(cardModel: CardModel) {
-                CoroutineScope(Dispatchers.IO).launch {
-                    cardCall.updateProductToCard(cardModel)}
-            }*/
+
         // отправка данный (заказа) на сервер
         fun loadClothesFromCard(): LiveData<List<FavoriteModel>> {
             return favoriteCall.loadClothesFromCard()    }

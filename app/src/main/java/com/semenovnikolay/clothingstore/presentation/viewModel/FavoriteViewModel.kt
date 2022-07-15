@@ -22,11 +22,6 @@ class FavoriteViewModel (private val favoriteUseCase: FavoriteUseCase): ViewMode
     private fun insert(favoriteModel: FavoriteModel) = viewModelScope.launch{
         favoriteUseCase.insert(favoriteModel)
     }
-/*    // launch позволяет запускать методы в параллельных потоках
-    // метод updateProductToCard меняет колличество конкретного вида товара в корзине
-    fun updateProductToCard(cardModel: CardModel) = viewModelScope.launch{
-        cardUseCase.updateProductToCard(cardModel)
-    }*/
 
     // так как в методе loadClothesFromCard() класса CardUseCase нет принимаемых значений, вместо создания метода,
     // возвращающего метод loadClothesFromCard(), можно присвоить его переменной

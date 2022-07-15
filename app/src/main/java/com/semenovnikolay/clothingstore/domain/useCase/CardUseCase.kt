@@ -11,11 +11,7 @@ class CardUseCase (private val cardCall: CardCall) {
     // добавление уникального товара в корзину
     suspend fun insert(cardModel: CardModel) {
         cardCall.insert(cardModel)    }
-/*    // увеличение (или уменьшение) количества пачек одного из препоратов
-    suspend fun updateProductToCard(cardModel: CardModel) {
-        CoroutineScope(Dispatchers.IO).launch {
-            cardCall.updateProductToCard(cardModel)}
-    }*/
+
     // отправка данный (заказа) на сервер
     fun loadClothesFromCard(): LiveData<List<CardModel>> {
         return cardCall.loadClothesFromCard()    }

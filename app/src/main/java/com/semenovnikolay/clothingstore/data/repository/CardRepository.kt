@@ -13,11 +13,6 @@ class CardRepository(private val dao: CardDao): CardCall {
     override suspend fun insert(cardModel: CardModel) {
         dao.insert(cardModel)    }
 
-/*    // обновление информации о товаре, после изменения его количества
-    override suspend fun updateProductToCard(cardModel: CardModel){
-        dao.updateProductToCard(cardModel)
-    }*/
-
     override fun loadClothesFromCard(): LiveData<List<CardModel>> {
         return dao.loadMedicineFromCard()    }
 

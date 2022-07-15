@@ -9,9 +9,6 @@ interface FavoriteCall {
     // suspend приостанавливает поток после выплнения метода
     suspend fun insert(favoriteModel: FavoriteModel)
 
-/*    // обновление информации о товаре, после изменения его количества
-    suspend fun updateProductToCard(cardModel: CardModel)*/
-
     fun loadClothesFromCard(): LiveData<List<FavoriteModel>>
 
     fun loadMedicineToCardFromCardProduct(idProduct:String): LiveData<List<FavoriteModel>>

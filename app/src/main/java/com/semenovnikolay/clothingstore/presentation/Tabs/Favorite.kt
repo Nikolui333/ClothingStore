@@ -91,18 +91,13 @@ class Favorite : Fragment() {
     }
 
     // добавление товара в корзину
-    private fun addToCard(favoriteModel: /*AddLocalModel*/FavoriteModel/*, addToBasket: AppCompatImageButton,
-                          removeFromBasket: AppCompatImageButton*/
-    ) {
+    private fun addToCard(favoriteModel: FavoriteModel) {
         cardViewModel.startInsert(favoriteModel.name,
             favoriteModel.image,
             favoriteModel.price,
             favoriteModel.id.toString(),
-            /*"1",*/
             favoriteModel.size
         )
-/*        addToBasket.visibility = View.GONE
-        removeFromBasket.visibility = View.VISIBLE*/
     }
 
     // удаление товара из корзины
@@ -162,7 +157,7 @@ class Favorite : Fragment() {
 
         favoriteViewModel.updateClothesSize(
             FavoriteModel(favoriteModel.id, favoriteModel.name,
-                favoriteModel.image, /*addLocalModel.description, addLocalModel.discount,*/ favoriteModel.price, favoriteModel.idFavoriteProduct, size.toString()
+                favoriteModel.image, favoriteModel.price, favoriteModel.idFavoriteProduct, size.toString()
             ))
     }
 }
