@@ -15,7 +15,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.semenovnikolay.clothingstore.data.models.CardModel
 
-class ShoppingCart : Fragment()/*,View.OnClickListener*/ {
+class ShoppingCart : Fragment() {
 
     private var binding: FragmentShoppingCartBinding? = null
     private var cardAdapter: ShoppingCartAdapter? = null
@@ -45,39 +45,6 @@ class ShoppingCart : Fragment()/*,View.OnClickListener*/ {
        // return inflater.inflate(R.layout.fragment_shopping_cart, container, false)
     }
 
-/*    // обработка кликов по кнопкам
-    override fun onClick(view: View) {
-      //  loadClothesFromCard()
-        when(view?.id) {
-            // очистка корзины
-            R.id.clearCard -> cardViewModel.clearCard()
-
-            // отправка заказа
-*//*            R.id.checkoutCard -> {
-                // запуск фрагмента (выезжающей панели) для ввода данных пользователя
-                val checkout = Checkout()
-                checkout.show((context as FragmentActivity).supportFragmentManager, "checkout")
-
-            }*//*
-        }
-    }
-
-
-    fun clearCardInClick(view: View) {
-        when(view?.id) {
-            // очистка корзины
-            R.id.clearCard -> cardViewModel.clearCard()
-
-            // отправка заказа
-*//*            R.id.checkoutCard -> {
-                // запуск фрагмента (выезжающей панели) для ввода данных пользователя
-                val checkout = Checkout()
-                checkout.show((context as FragmentActivity).supportFragmentManager, "checkout")
-
-            }*//*
-        }
-    }*/
-
     // инициализация
     private fun initRecyclerCard() {
 
@@ -98,6 +65,12 @@ class ShoppingCart : Fragment()/*,View.OnClickListener*/ {
         cardViewModel.loadClothesFromCard.observe(viewLifecycleOwner, Observer {
             cardAdapter?.setList(it)
             cardAdapter?.notifyDataSetChanged()
+
+            val total:Int = it.sumOf<CardModel>
+            // суммировать поля price
+            { it.price.toInt() }
+
+            binding?.totalOrder?.text = total.toString()
         })
     }
 
@@ -105,7 +78,4 @@ class ShoppingCart : Fragment()/*,View.OnClickListener*/ {
 
         cardViewModel.deleteProductFromCard(cardModel.id)
     }
-
-
-
 }
